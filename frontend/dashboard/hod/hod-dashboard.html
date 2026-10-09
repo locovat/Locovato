@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HOD Dashboard – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student-dashboard.css" />
+  <link rel="stylesheet" href="hod-dashboard.css" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+      <div class="logo">E‑Learn Portal</div>
+    </div>
+    <div class="top-bar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+      </button>
+
+      <div class="notifications">
+        <span class="notif-badge">3</span>
+        🔔
+      </div>
+      <div class="user-profile">
+        <img src="avatar.png" alt="HOD avatar" class="avatar" />
+        <span class="user-name">Prof. K. Adeyemi</span>
+        <span class="user-role">HOD</span>
+      </div>
+      <a href="#" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <a href="hod-dashboard.html" class="nav-item active">🏠 Dashboard</a>
+        <a href="hod-courses.html" class="nav-item">📚 Courses</a>
+        <a href="hod-score-sheets.html" class="nav-item">📋 Score Sheets</a>
+        <a href="hod-results.html" class="nav-item">📊 Results Processing</a>
+        <a href="hod-notifications.html" class="nav-item">📢 Notifications</a>
+        <a href="#" class="nav-item">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="welcome-section">
+        <h1>Welcome, Prof. K. Adeyemi</h1>
+        <p class="hod-info">Head of Department: Computer Science</p>
+      </section>
+
+      <!-- Summary Cards -->
+      <section class="cards-grid">
+        <div class="card">
+          <div class="card-title">Total Courses</div>
+          <div class="card-value">12</div>
+          <a href="hod-courses.html" class="card-link">Manage Courses →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Staff Members</div>
+          <div class="card-value">8</div>
+          <a href="hod-courses.html" class="card-link">View Staff →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Pending Score Sheets</div>
+          <div class="card-value">3</div>
+          <a href="hod-score-sheets.html" class="card-link">Review →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Processed Result Batches</div>
+          <div class="card-value">5</div>
+          <a href="hod-results.html" class="card-link">View Results →</a>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="actions-grid">
+          <a href="hod-courses.html" class="action-btn">Assign Courses</a>
+          <a href="hod-score-sheets.html" class="action-btn">Review Score Sheets</a>
+          <a href="hod-results.html" class="action-btn">Process Results</a>
+          <a href="hod-notifications.html" class="action-btn">Post Announcement</a>
+        </div>
+      </section>
+
+      <!-- Notifications & Pending Score Sheets -->
+      <section class="two-columns">
+        <!-- Notifications -->
+        <div class="panel">
+          <h2>Department Notifications</h2>
+          <ul class="notif-list">
+            <li class="notif-item">
+              <span class="notif-type system">System</span>
+              <span class="notif-text">
+                Result batch for <strong>2025/2026 – First Semester</strong> has been uploaded to student portal.
+              </span>
+            </li>
+            <li class="notif-item">
+              <span class="notif-type staff">Staff</span>
+              <span class="notif-text">
+                Dr. A. Johnson submitted score sheet for <strong>CSC301</strong>.
+              </span>
+            </li>
+            <li class="notif-item">
+              <span class="notif-type alert">Alert</span>
+              <span class="notif-text">
+                3 score sheets pending approval for <strong>2025/2026 – First Semester</strong>.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Pending Score Sheets -->
+        <div class="panel">
+          <h2>Pending Score Sheets</h2>
+          <ul class="score-sheets-list">
+            <li class="score-sheet-item">
+              <div class="score-sheet-info">
+                <div class="score-sheet-course">CSC301 – Database Systems</div>
+                <div class="score-sheet-meta">Lecturer: Dr. A. Johnson • 42 students</div>
+              </div>
+              <a href="hod-score-sheets.html?course=CSC301" class="action-btn-small">Review</a>
+            </li>
+            <li class="score-sheet-item">
+              <div class="score-sheet-info">
+                <div class="score-sheet-course">CSC304 – Computer Networks</div>
+                <div class="score-sheet-meta">Lecturer: Mr. T. Ibrahim • 38 students</div>
+              </div>
+              <a href="hod-score-sheets.html?course=CSC304" class="action-btn-small">Review</a>
+            </li>
+            <li class="score-sheet-item">
+              <div class="score-sheet-info">
+                <div class="score-sheet-course">CSC305 – Software Engineering</div>
+                <div class="score-sheet-meta">Lecturer: Prof. K. Adeyemi • 45 students</div>
+              </div>
+              <a href="hod-score-sheets.html?course=CSC305" class="action-btn-small">Review</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Recent Activity -->
+      <section class="panel">
+        <h2>Recent Activity</h2>
+        <ul class="activity-list">
+          <li class="activity-item">
+            Approved score sheet for <strong>CSC310 – Artificial Intelligence</strong>
+            <span class="activity-time">2 hours ago</span>
+          </li>
+          <li class="activity-item">
+            Processed and uploaded results for <strong>2024/2025 – Second Semester</strong>
+            <span class="activity-time">Yesterday</span>
+          </li>
+          <li class="activity-item">
+            Assigned <strong>CSC312 – Machine Learning</strong> to Dr. L. Mohammed
+            <span class="activity-time">2 days ago</span>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

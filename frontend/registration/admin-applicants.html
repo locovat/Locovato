@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin – Applications – Threshing Floor International</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="admin-applicants.css" />
+</head>
+<body class="admin-body light-mode">
+  <div class="admin-background">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <div class="admin-wrapper">
+    <button class="theme-toggle-absolute" id="themeToggle" aria-label="Toggle theme">🌙</button>
+
+    <div class="marquee-banner">
+      <div class="marquee-content">
+        <span>Admin Dashboard – Manage Applications</span>
+        <span aria-hidden="true"> • </span>
+        <span>Threshing Floor International School of Ministry and Biblical Studies</span>
+        <span aria-hidden="true"> • </span>
+      </div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-header">
+        <div class="admin-logo">⚙️ Admin Portal</div>
+        <h1>Applications</h1>
+        <p class="admin-subtitle">Review and manage applicant submissions</p>
+      </div>
+
+      <div id="loadingState" class="admin-loading">
+        <div class="spinner"></div>
+        <div>Loading applications…</div>
+      </div>
+
+      <div id="errorState" class="admin-error" style="display:none;">
+        <div class="error-icon">⚠️</div>
+        <h2>Unable to load applications</h2>
+        <p id="errorMessage">An unexpected error occurred.</p>
+        <div class="error-actions">
+          <button class="btn-secondary" id="retryButton">Retry</button>
+          <a href="login.html" class="btn-link">Go to Login</a>
+        </div>
+      </div>
+
+      <div id="unauthorizedState" class="admin-error" style="display:none;">
+        <div class="error-icon">🚫</div>
+        <h2>Access Denied</h2>
+        <p>You must be logged in as an admin to view this page.</p>
+        <div class="error-actions">
+          <a href="login.html" class="btn-primary">Login</a>
+        </div>
+      </div>
+
+      <div id="adminContent" class="admin-content" style="display:none;">
+        <!-- Filters -->
+        <div class="filters-bar">
+          <div class="filter-group">
+            <label for="statusFilter">Status</label>
+            <select id="statusFilter">
+              <option value="">All</option>
+              <option value="draft">Draft</option>
+              <option value="submitted">Submitted</option>
+              <option value="under_review">Under Review</option>
+              <option value="approved">Approved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="paymentFilter">Payment</label>
+            <select id="paymentFilter">
+              <option value="">All</option>
+              <option value="unpaid">Unpaid</option>
+              <option value="paid">Paid</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="searchInput">Search</label>
+            <input type="text" id="searchInput" placeholder="Name or email" />
+          </div>
+
+          <div class="filter-actions">
+            <button class="btn-secondary" id="applyFilters">Apply</button>
+            <button class="btn-secondary" id="resetFilters">Reset</button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Program</th>
+                <th>Status</th>
+                <th>Payment</th>
+                <th>Applied On</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="applicantsTableBody">
+              <!-- Rows injected by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-bar">
+          <button class="btn-secondary" id="prevPage" disabled>Previous</button>
+          <span id="pageInfo">Page 1</span>
+          <button class="btn-secondary" id="nextPage">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for applicant details & admission actions -->
+  <div id="applicantModal" class="modal-overlay" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 class="modal-title">Applicant Details</h2>
+        <button class="modal-close" id="modalClose" aria-label="Close modal">×</button>
+      </div>
+
+      <div id="modalLoading" class="admin-loading" style="display:none;">
+        <div class="spinner"></div>
+        <div>Loading applicant…</div>
+      </div>
+
+      <div id="modalError" class="admin-error" style="display:none;">
+        <div class="error-icon">⚠️</div>
+        <h2>Unable to load applicant</h2>
+        <p id="modalErrorMessage">An unexpected error occurred.</p>
+      </div>
+
+      <div id="modalContent" style="display:none;">
+        <div class="modal-section">
+          <h3>Basic Information</h3>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <div class="detail-label">Name</div>
+              <div class="detail-value" id="mName">–</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Email</div>
+              <div class="detail-value" id="mEmail">–</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Application ID</div>
+              <div class="detail-value" id="mIdentity">–</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Program</div>
+              <div class="detail-value" id="mProgram">–</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Entry Level</div>
+              <div class="detail-value" id="mEntryLevel">–</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Study Mode</div>
+              <div class="detail-value" id="mStudyMode">–</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Application Status</div>
+              <div class="detail-value" id="mStatus">–</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Payment Status</div>
+              <div class="detail-value" id="mPaymentStatus">–</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Admission Status</div>
+              <div class="detail-value" id="mAdmissionStatus">–</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>Admission Actions</h3>
+          <p class="admin-note">
+            Use these actions to manage the applicant’s admission status.
+          </p>
+
+          <div class="admission-actions">
+            <button class="btn-primary" id="offerAdmissionBtn">
+              Offer Admission
+            </button>
+            <button class="btn-secondary" id="confirmAdmissionBtn">
+              Confirm Admission
+            </button>
+            <button class="btn-danger" id="rejectAdmissionBtn">
+              Reject Admission
+            </button>
+          </div>
+
+          <div id="admissionMessage" class="admin-note" style="margin-top:0.75rem;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin-applicants.js"></script>
+</body>
+</html>

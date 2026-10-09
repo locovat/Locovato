@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Staff Dashboard – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student-dashboard.css" />
+  <link rel="stylesheet" href="staff-dashboard.css" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+      <div class="logo">E‑Learn Portal</div>
+    </div>
+    <div class="top-bar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+      </button>
+
+      <div class="notifications">
+        <span class="notif-badge">3</span>
+        🔔
+      </div>
+      <div class="user-profile">
+        <img src="avatar.png" alt="Staff avatar" class="avatar" />
+        <span class="user-name">Dr. A. Johnson</span>
+        <span class="user-role">Staff</span>
+      </div>
+      <a href="#" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <a href="staff-dashboard.html" class="nav-item active">🏠 Dashboard</a>
+        <a href="staff-courses.html" class="nav-item">📚 My Courses</a>
+        <a href="staff-assignments.html" class="nav-item">📝 Assignments</a>
+        <a href="staff-results.html" class="nav-item">📊 Results & Grading</a>
+        <a href="staff-live.html" class="nav-item">📹 Live Classes</a>
+        <a href="#" class="nav-item">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="welcome-section">
+        <h1>Welcome, Dr. A. Johnson</h1>
+        <p class="staff-info">Department: Computer Science | Staff ID: STAFF001</p>
+      </section>
+
+      <!-- Summary Cards -->
+      <section class="cards-grid">
+        <div class="card">
+          <div class="card-title">Courses Assigned</div>
+          <div class="card-value">4</div>
+          <a href="staff-courses.html" class="card-link">Manage Courses →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Pending Grading</div>
+          <div class="card-value">2</div>
+          <a href="staff-results.html" class="card-link">Grade Submissions →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Upcoming Live Classes</div>
+          <div class="card-value">1</div>
+          <a href="staff-live.html" class="card-link">View Schedule →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Result Sheets</div>
+          <div class="card-value">3</div>
+          <a href="staff-results.html" class="card-link">Upload / Manage →</a>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="actions-grid">
+          <a href="staff-courses.html" class="action-btn">Upload Material</a>
+          <a href="staff-assignments.html" class="action-btn">Create Assignment</a>
+          <a href="staff-results.html" class="action-btn">Upload Scores</a>
+          <a href="staff-live.html" class="action-btn">Schedule Live Class</a>
+        </div>
+      </section>
+
+      <!-- Notifications & Upcoming Live -->
+      <section class="two-columns">
+        <!-- Notifications -->
+        <div class="panel">
+          <h2>Notifications</h2>
+          <ul class="notif-list">
+            <li class="notif-item">
+              <span class="notif-type hod">HOD</span>
+              <span class="notif-text">
+                Course <strong>CSC301</strong> assigned to you for grading and result upload.
+              </span>
+            </li>
+            <li class="notif-item">
+              <span class="notif-type system">System</span>
+              <span class="notif-text">
+                Result sheet for <strong>CSC304</strong> has been approved by HOD.
+              </span>
+            </li>
+            <li class="notif-item">
+              <span class="notif-type live">Live Class</span>
+              <span class="notif-text">
+                Live class for <strong>CSC301</strong> scheduled today at 8:00 PM.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Upcoming Live Classes -->
+        <div class="panel">
+          <h2>Upcoming Live Classes</h2>
+          <ul class="class-list">
+            <li class="class-item">
+              <div class="class-info">
+                <div class="class-code">CSC301</div>
+                <div class="class-title">Database Systems</div>
+                <div class="class-time">Today, 8:00 PM – 9:00 PM</div>
+              </div>
+              <a href="live-room.html?session=1" class="join-btn">Start Class</a>
+            </li>
+            <li class="class-item">
+              <div class="class-info">
+                <div class="class-code">CSC304</div>
+                <div class="class-title">Computer Networks</div>
+                <div class="class-time">Tomorrow, 10:00 AM – 11:00 AM</div>
+              </div>
+              <a href="live-room.html?session=2" class="join-btn">Start Class</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Recent Activity -->
+      <section class="panel">
+        <h2>Recent Activity</h2>
+        <ul class="activity-list">
+          <li class="activity-item">
+            Uploaded lecture notes for <strong>CSC301 – Week 3</strong>
+            <span class="activity-time">2 hours ago</span>
+          </li>
+          <li class="activity-item">
+            Created assignment for <strong>CSC304 – Assignment 1</strong>
+            <span class="activity-time">Yesterday</span>
+          </li>
+          <li class="activity-item">
+            Submitted score sheet for <strong>CSC305</strong> to HOD
+            <span class="activity-time">2 days ago</span>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

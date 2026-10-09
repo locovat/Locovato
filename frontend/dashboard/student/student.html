@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Dashboard – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student-dashboard.css" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+      <div class="logo">E‑Learn Portal</div>
+    </div>
+    <div class="top-bar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+      </button>
+
+      <div class="notifications">
+        <span class="notif-badge">3</span>
+        🔔
+      </div>
+      <div class="user-profile">
+        <img src="avatar.png" alt="Student avatar" class="avatar" />
+        <span class="user-name">John Doe</span>
+        <span class="user-role">Student</span>
+      </div>
+      <a href="#" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active">🏠 Dashboard</a>
+        <a href="my-courses.html" class="nav-item">📚 My Courses</a>
+        <a href="#" class="nav-item">📝 Assignments</a>
+        <a href="#" class="nav-item">📅 Live Classes</a>
+        <a href="#" class="nav-item">💳 Fees & Payments</a>
+        <a href="#" class="nav-item">📊 Results & GPA</a>
+        <a href="#" class="nav-item">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Welcome & Summary -->
+      <section class="welcome-section">
+        <h1>Welcome, John Doe</h1>
+        <p class="student-info">Matric No: 2023/CS/001 | B.Sc. Computer Science</p>
+      </section>
+
+      <!-- Summary Cards -->
+      <section class="cards-grid">
+        <div class="card">
+          <div class="card-title">Registered Courses</div>
+          <div class="card-value">6</div>
+          <a href="#" class="card-link">View Courses →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Pending Assignments</div>
+          <div class="card-value">2</div>
+          <a href="#" class="card-link">View Assignments →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Live Classes Today</div>
+          <div class="card-value">1</div>
+          <a href="#" class="card-link">See Schedule →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Fees Status</div>
+          <div class="card-value fee-partial">Partially Paid</div>
+          <a href="#" class="card-link">Pay Fees →</a>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="actions-grid">
+          <a href="#" class="action-btn">Register Courses</a>
+          <a href="#" class="action-btn">Pay Fees</a>
+          <a href="#" class="action-btn">View Live Classes</a>
+          <a href="#" class="action-btn">Check Results</a>
+        </div>
+      </section>
+
+      <!-- Notifications & Upcoming -->
+      <section class="two-columns">
+        <!-- Notifications -->
+        <div class="panel">
+          <h2>Notifications</h2>
+          <ul class="notif-list">
+            <li class="notif-item">
+              <span class="notif-type live">Live Class</span>
+              <span class="notif-text">
+                Live class for <strong>CSC301</strong> starts in 30 minutes.
+              </span>
+            </li>
+            <li class="notif-item">
+              <span class="notif-type assignment">Assignment</span>
+              <span class="notif-text">
+                New assignment posted for <strong>CSC305</strong> – Due 28 Sep.
+              </span>
+            </li>
+            <li class="notif-item">
+              <span class="notif-type fee">Fees</span>
+              <span class="notif-text">
+                Outstanding tuition fee: <strong>$450</strong>. Pay now to avoid penalties.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Upcoming Live Classes -->
+        <div class="panel">
+          <h2>Upcoming Live Classes</h2>
+          <ul class="class-list">
+            <li class="class-item">
+              <div class="class-info">
+                <div class="class-code">CSC301</div>
+                <div class="class-title">Database Systems</div>
+                <div class="class-time">Today, 8:00 PM – 9:00 PM</div>
+              </div>
+              <a href="#" class="join-btn">Join Class</a>
+            </li>
+            <li class="class-item">
+              <div class="class-info">
+                <div class="class-code">CSC305</div>
+                <div class="class-title">Software Engineering</div>
+                <div class="class-time">Tomorrow, 10:00 AM – 11:00 AM</div>
+              </div>
+              <a href="#" class="join-btn">Join Class</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Recent Activity -->
+      <section class="panel">
+        <h2>Recent Activity</h2>
+        <ul class="activity-list">
+          <li class="activity-item">
+            Accessed notes for <strong>CSC301 – Database Systems</strong>
+            <span class="activity-time">2 hours ago</span>
+          </li>
+          <li class="activity-item">
+            Submitted assignment for <strong>CSC304 – Networks</strong>
+            <span class="activity-time">Yesterday</span>
+          </li>
+          <li class="activity-item">
+            Paid $200 towards tuition fees
+            <span class="activity-time">2 days ago</span>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+    });
+
+    // Theme toggle (light/dark)
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

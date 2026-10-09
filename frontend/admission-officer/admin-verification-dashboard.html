@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="admin-verification-dashboard.css" />
+</head>
+<body class="admin-body light-mode">
+  <div class="admin-background">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <div class="admin-wrapper">
+    <!-- Theme toggle -->
+    <button class="theme-toggle-absolute" id="themeToggle" aria-label="Toggle theme">
+      🌙
+    </button>
+
+    <!-- Header -->
+    <div class="admin-header">
+      <div class="admin-logo">E‑Learn Portal – Admin</div>
+      <div class="admin-user">
+        <span class="user-name">Admin User</span>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📥</div>
+        <div class="stat-info">
+          <div class="stat-value" id="totalApps">0</div>
+          <div class="stat-label">Total Applications</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-info">
+          <div class="stat-value" id="pendingApps">0</div>
+          <div class="stat-label">Pending Review</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">✅</div>
+        <div class="stat-info">
+          <div class="stat-value" id="approvedApps">0</div>
+          <div class="stat-label">Approved</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">❌</div>
+        <div class="stat-info">
+          <div class="stat-value" id="rejectedApps">0</div>
+          <div class="stat-label">Rejected</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters-section">
+      <div class="filter-group">
+        <label for="statusFilter">Status:</label>
+        <select id="statusFilter">
+          <option value="all">All</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="programFilter">Program:</label>
+        <select id="programFilter">
+          <option value="all">All Programs</option>
+          <option value="CS">Computer Science</option>
+          <option value="IT">Information Technology</option>
+          <option value="EE">Electrical Engineering</option>
+          <option value="BUS">Business Administration</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="searchBox">Search:</label>
+        <input type="text" id="searchBox" placeholder="Name or email..." />
+      </div>
+    </div>
+
+    <!-- Applications Table -->
+    <div class="table-card">
+      <div class="table-header">
+        <h2 class="table-title">Applications</h2>
+        <button class="refresh-btn" id="refreshBtn">🔄 Refresh</button>
+      </div>
+      <div class="table-wrapper">
+        <table class="applications-table">
+          <thead>
+            <tr>
+              <th>Applicant</th>
+              <th>Program</th>
+              <th>Level</th>
+              <th>Status</th>
+              <th>Submitted</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="applicationsTableBody">
+            <tr>
+              <td colspan="6" class="loading-cell">Loading applications...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Detail Modal -->
+  <div class="modal-overlay" id="detailModal" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Application Details</h2>
+        <button class="modal-close" id="closeModal">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Dynamic content loaded here -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="rejectBtn">Reject</button>
+        <button class="btn-primary" id="approveBtn">Approve & Issue Admission</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const body = document.body;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      if (isDark) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+      } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+      }
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Demo applications data
+    const demoApplications = [
+      {
+        id: 'APP001',
+        fullName: 'John Doe',
+        email: 'john.doe@example.com',
+        program: 'CS',
+        programName: 'B.Sc. Computer Science',
+        level: '100',
+        status: 'pending',
+        submittedDate: '2026-09-20',
+        phone: '+234 8012345678',
+        state: 'Lagos'
+      },
+      {
+        id: 'APP002',
+        fullName: 'Jane Smith',
+        email: 'jane.smith@example.com',
+        program: 'IT',
+        programName: 'B.Sc. Information Technology',
+        level: '100',
+        status: 'approved',
+        submittedDate: '2026-09-19',
+        phone: '+234 8098765432',
+        state: 'Kano'
+      },
+      {
+        id: 'APP003',
+        fullName: 'Michael Brown',
+        email: 'michael.b@example.com',
+        program: 'EE',
+        programName: 'B.Eng. Electrical Engineering',
+        level: '200',
+        status: 'rejected',
+        submittedDate: '2026-09-18',
+        phone: '+234 8055551234',
+        state: 'Rivers'
+      },
+      {
+        id: 'APP004',
+        fullName: 'Sarah Johnson',
+        email: 'sarah.j@example.com',
+        program: 'BUS',
+        programName: 'B.Sc. Business Administration',
+        level: '100',
+        status: 'pending',
+        submittedDate: '2026-09-21',
+        phone: '+234 8077778888',
+        state: 'Abuja'
+      }
+    ];
+
+    let currentAppId = null;
+
+    // Load applications
+    function loadApplications() {
+      const tableBody = document.getElementById('applicationsTableBody');
+      const statusFilter = document.getElementById('statusFilter').value;
+      const programFilter = document.getElementById('programFilter').value;
+      const searchBox = document.getElementById('searchBox').value.toLowerCase();
+
+      let filtered = demoApplications;
+
+      // Apply filters
+      if (statusFilter !== 'all') {
+        filtered = filtered.filter(app => app.status === statusFilter);
+      }
+      if (programFilter !== 'all') {
+        filtered = filtered.filter(app => app.program === programFilter);
+      }
+      if (searchBox) {
+        filtered = filtered.filter(app => 
+          app.fullName.toLowerCase().includes(searchBox) ||
+          app.email.toLowerCase().includes(searchBox)
+        );
+      }
+
+      // Update stats
+      document.getElementById('totalApps').textContent = demoApplications.length;
+      document.getElementById('pendingApps').textContent = demoApplications.filter(a => a.status === 'pending').length;
+      document.getElementById('approvedApps').textContent = demoApplications.filter(a => a.status === 'approved').length;
+      document.getElementById('rejectedApps').textContent = demoApplications.filter(a => a.status === 'rejected').length;
+
+      // Render table
+      if (filtered.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6" class="loading-cell">No applications found</td></tr>';
+        return;
+      }
+
+      tableBody.innerHTML = filtered.map(app => `
+        <tr>
+          <td>
+            <div class="applicant-name">${app.fullName}</div>
+            <div class="applicant-email">${app.email}</div>
+          </td>
+          <td>${app.programName}</td>
+          <td>${app.level} Level</td>
+          <td>
+            <span class="status-badge status-${app.status}">${app.status}</span>
+          </td>
+          <td>${app.submittedDate}</td>
+          <td>
+            <button class="action-btn view-btn" data-id="${app.id}">View</button>
+          </td>
+        </tr>
+      `).join('');
+
+      // Add event listeners to view buttons
+      document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const appId = e.target.dataset.id;
+          openApplicationDetail(appId);
+        });
+      });
+    }
+
+    // Open application detail modal
+    function openApplicationDetail(appId) {
+      const app = demoApplications.find(a => a.id === appId);
+      if (!app) return;
+
+      currentAppId = appId;
+      const modalBody = document.getElementById('modalBody');
+
+      modalBody.innerHTML = `
+        <div class="detail-section">
+          <h3 class="detail-title">📋 Applicant Information</h3>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <span class="detail-label">Application ID:</span>
+              <span class="detail-value">${app.id}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Full Name:</span>
+              <span class="detail-value">${app.fullName}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Email:</span>
+              <span class="detail-value">${app.email}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Phone:</span>
+              <span class="detail-value">${app.phone}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">State:</span>
+              <span class="detail-value">${app.state}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Program:</span>
+              <span class="detail-value">${app.programName}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Entry Level:</span>
+              <span class="detail-value">${app.level} Level</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Status:</span>
+              <span class="detail-value status-${app.status}">${app.status}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h3 class="detail-title">📁 Uploaded Documents</h3>
+          <div class="documents-list">
+            <div class="document-item">
+              <span>✓ WAEC Certificate</span>
+              <button class="doc-view-btn">View</button>
+            </div>
+            <div class="document-item">
+              <span>✓ Birth Certificate</span>
+              <button class="doc-view-btn">View</button>
+            </div>
+            <div class="document-item">
+              <span>✓ Passport Photo</span>
+              <button class="doc-view-btn">View</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('detailModal').style.display = 'flex';
+    }
+
+    // Close modal
+    document.getElementById('closeModal').addEventListener('click', () => {
+      document.getElementById('detailModal').style.display = 'none';
+      currentAppId = null;
+    });
+
+    // Approve button
+   document.getElementById('approveBtn').addEventListener('click', () => {
+  if (!currentAppId) return;
+  
+  // Redirect to admission letter generator
+  window.location.href = `generate-admission-letter.html?appId=${currentAppId}`;
+});
+
+    // Reject button
+    document.getElementById('rejectBtn').addEventListener('click', () => {
+      if (!currentAppId) return;
+      
+      const reason = prompt('Enter rejection reason:');
+      if (reason) {
+        const app = demoApplications.find(a => a.id === currentAppId);
+        if (app) {
+          app.status = 'rejected';
+          alert(`Application rejected. Reason: ${reason}`);
+          // TODO: Send rejection email
+          loadApplications();
+          document.getElementById('detailModal').style.display = 'none';
+        }
+      }
+    });
+
+    // Filter event listeners
+    document.getElementById('statusFilter').addEventListener('change', loadApplications);
+    document.getElementById('programFilter').addEventListener('change', loadApplications);
+    document.getElementById('searchBox').addEventListener('input', loadApplications);
+    document.getElementById('refreshBtn').addEventListener('click', loadApplications);
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      if (confirm('Are you sure you want to logout?')) {
+        window.location.href = 'login.html';
+      }
+    });
+
+    // Initialize
+    loadApplications();
+  </script>
+</body>
+</html>

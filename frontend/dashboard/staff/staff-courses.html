@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Courses (Staff) – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student-dashboard.css" />
+  <link rel="stylesheet" href="staff-courses.css" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+      <div class="logo">E‑Learn Portal</div>
+    </div>
+    <div class="top-bar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+      </button>
+
+      <div class="notifications">
+        <span class="notif-badge">2</span>
+        🔔
+      </div>
+      <div class="user-profile">
+        <img src="avatar.png" alt="Staff avatar" class="avatar" />
+        <span class="user-name">Dr. A. Johnson</span>
+        <span class="user-role">Staff</span>
+      </div>
+      <a href="#" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <a href="staff-dashboard.html" class="nav-item">🏠 Dashboard</a>
+        <a href="staff-courses.html" class="nav-item active">📚 My Courses</a>
+        <a href="staff-assignments.html" class="nav-item">📝 Assignments</a>
+        <a href="staff-results.html" class="nav-item">📊 Results & Grading</a>
+        <a href="staff-live.html" class="nav-item">📹 Live Classes</a>
+        <a href="#" class="nav-item">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="page-header">
+        <h1>My Courses</h1>
+        <p class="page-subtitle">Courses assigned to you for teaching and grading</p>
+      </section>
+
+      <!-- Filters -->
+      <section class="filters-bar">
+        <div class="filter-group">
+          <label for="session">Session:</label>
+          <select id="session">
+            <option>2025/2026</option>
+            <option>2024/2025</option>
+            <option>2023/2024</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="semester">Semester:</label>
+          <select id="semester">
+            <option>First Semester</option>
+            <option>Second Semester</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="search-course">Search:</label>
+          <input type="text" id="search-course" placeholder="Course code or title" />
+        </div>
+      </section>
+
+      <!-- Courses Grid -->
+      <section class="courses-grid">
+        <!-- Course Card 1 -->
+        <div class="course-card">
+          <div class="course-header">
+            <div class="course-code">CSC301</div>
+            <div class="course-units">3 Units</div>
+          </div>
+          <div class="course-title">Database Systems</div>
+          <div class="course-meta">
+            <div>Level: 300</div>
+            <div>Students: 42</div>
+          </div>
+          <div class="course-actions">
+            <a href="staff-course-manage.html?code=CSC301" class="course-btn">Manage Course</a>
+          </div>
+        </div>
+
+        <!-- Course Card 2 -->
+        <div class="course-card">
+          <div class="course-header">
+            <div class="course-code">CSC304</div>
+            <div class="course-units">3 Units</div>
+          </div>
+          <div class="course-title">Computer Networks</div>
+          <div class="course-meta">
+            <div>Level: 300</div>
+            <div>Students: 38</div>
+          </div>
+          <div class="course-actions">
+            <a href="staff-course-manage.html?code=CSC304" class="course-btn">Manage Course</a>
+          </div>
+        </div>
+
+        <!-- Course Card 3 -->
+        <div class="course-card">
+          <div class="course-header">
+            <div class="course-code">CSC305</div>
+            <div class="course-units">3 Units</div>
+          </div>
+          <div class="course-title">Software Engineering</div>
+          <div class="course-meta">
+            <div>Level: 300</div>
+            <div>Students: 45</div>
+          </div>
+          <div class="course-actions">
+            <a href="staff-course-manage.html?code=CSC305" class="course-btn">Manage Course</a>
+          </div>
+        </div>
+
+        <!-- Course Card 4 -->
+        <div class="course-card">
+          <div class="course-header">
+            <div class="course-code">CSC310</div>
+            <div class="course-units">3 Units</div>
+          </div>
+          <div class="course-title">Artificial Intelligence</div>
+          <div class="course-meta">
+            <div>Level: 300</div>
+            <div>Students: 30</div>
+          </div>
+          <div class="course-actions">
+            <a href="staff-course-manage.html?code=CSC310" class="course-btn">Manage Course</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

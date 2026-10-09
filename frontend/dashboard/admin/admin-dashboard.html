@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student-dashboard.css" />
+  <link rel="stylesheet" href="admin-dashboard.css" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+      <div class="logo">E‑Learn Portal</div>
+    </div>
+    <div class="top-bar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+      </button>
+
+      <div class="notifications">
+        <span class="notif-badge">2</span>
+        🔔
+      </div>
+      <div class="user-profile">
+        <img src="avatar.png" alt="Admin avatar" class="avatar" />
+        <span class="user-name">System Admin</span>
+        <span class="user-role">Admin</span>
+      </div>
+      <a href="#" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <a href="admin-dashboard.html" class="nav-item active">🏠 Dashboard</a>
+        <a href="admin-users.html" class="nav-item">👥 Users</a>
+        <a href="admin-courses.html" class="nav-item">📚 Courses</a>
+        <a href="admin-sessions.html" class="nav-item">🗓️ Sessions</a>
+        <a href="admin-settings.html" class="nav-item">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="welcome-section">
+        <h1>Admin Dashboard</h1>
+        <p class="admin-info">Manage users, courses, sessions, and system settings</p>
+      </section>
+
+      <!-- Summary Cards -->
+      <section class="cards-grid">
+        <div class="card">
+          <div class="card-title">Total Users</div>
+          <div class="card-value">320</div>
+          <a href="admin-users.html" class="card-link">Manage Users →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Students</div>
+          <div class="card-value">250</div>
+          <a href="admin-users.html?role=student" class="card-link">View Students →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Staff & HOD</div>
+          <div class="card-value">70</div>
+          <a href="admin-users.html?role=staff" class="card-link">View Staff →</a>
+        </div>
+        <div class="card">
+          <div class="card-title">Active Sessions</div>
+          <div class="card-value">3</div>
+          <a href="admin-sessions.html" class="card-link">Manage Sessions →</a>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="actions-grid">
+          <a href="admin-users.html" class="action-btn">Add User</a>
+          <a href="admin-courses.html" class="action-btn">Add Course</a>
+          <a href="admin-sessions.html" class="action-btn">Add Session</a>
+          <a href="admin-settings.html" class="action-btn">System Settings</a>
+        </div>
+      </section>
+
+      <!-- Recent Activity & System Info -->
+      <section class="two-columns">
+        <!-- Recent Activity -->
+        <div class="panel">
+          <h2>Recent Admin Activity</h2>
+          <ul class="activity-list">
+            <li class="activity-item">
+              Created new user: <strong>Dr. A. Johnson (Staff)</strong>
+              <span class="activity-time">2 hours ago</span>
+            </li>
+            <li class="activity-item">
+              Added course: <strong>CSC312 – Machine Learning</strong>
+              <span class="activity-time">Yesterday</span>
+            </li>
+            <li class="activity-item">
+              Activated session: <strong>2025/2026 – First Semester</strong>
+              <span class="activity-time">2 days ago</span>
+            </li>
+            <li class="activity-item">
+              Updated grading scale in <strong>System Settings</strong>
+              <span class="activity-time">3 days ago</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- System Info -->
+        <div class="panel">
+          <h2>System Info</h2>
+          <ul class="info-list">
+            <li class="info-item">
+              <div class="info-label">Platform Version</div>
+              <div class="info-value">1.0.0 (Demo)</div>
+            </li>
+            <li class="info-item">
+              <div class="info-label">Active Session</div>
+              <div class="info-value">2025/2026 – First Semester</div>
+            </li>
+            <li class="info-item">
+              <div class="info-label">Departments</div>
+              <div class="info-value">Computer Science, Information Tech</div>
+            </li>
+            <li class="info-item">
+              <div class="info-label">Storage Used</div>
+              <div class="info-value">12.4 GB / 100 GB</div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

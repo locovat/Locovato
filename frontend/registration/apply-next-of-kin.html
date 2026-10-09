@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Apply – Step 2 – Threshing Floor International</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="apply-next-of-kin.css" />
+</head>
+<body class="apply-body light-mode">
+<div class="apply-background">
+<div class="glow-orb orb-1"></div>
+<div class="glow-orb orb-2"></div>
+<div class="glow-orb orb-3"></div>
+</div>
+
+<div class="apply-wrapper">
+<!-- Theme toggle -->
+<button class="theme-toggle-absolute" id="themeToggle" aria-label="Toggle theme">
+🌙
+</button>
+
+<!-- Marquee banner -->
+<div class="marquee-banner">
+<div class="marquee-content">
+<span>Applicant Registration – Step 2 of 4: Next of Kin</span>
+<span aria-hidden="true"> • </span>
+<span>Provide details of a person to contact in case of emergency</span>
+<span aria-hidden="true"> • </span>
+</div>
+</div>
+
+<div class="apply-card">
+<div class="apply-header">
+<div class="apply-logo">Threshing Floor International</div>
+<img src="images/tflogo.jpg" alt="Threshing Floor International Logo" style="display:block; max-width:120px; height:auto; margin:0.75rem auto;">
+<h1>Application Form – Step 2</h1>
+<p class="apply-subtitle">Next of Kin Information</p>
+</div>
+
+<form class="apply-form" id="nextOfKinForm">
+<!-- Next of Kin Full Name -->
+<div class="form-group full-width">
+<label for="nokFullName">Next of Kin Full Name</label>
+<input
+type="text"
+id="nokFullName"
+name="nokFullName"
+placeholder="e.g. loco Vato"
+required
+/>
+</div>
+
+<!-- State of Origin & Country -->
+<div class="form-row">
+<div class="form-group">
+<label for="nokState">State of Origin</label>
+<input
+type="text"
+id="nokState"
+name="nokState"
+placeholder="e.g. Lafia"
+required
+/>
+</div>
+
+<div class="form-group">
+<label for="nokCountry">Country</label>
+<input
+type="text"
+id="nokCountry"
+name="nokCountry"
+placeholder="e.g. Nigeria"
+required
+/>
+</div>
+</div>
+
+<!-- Country Code & Phone -->
+<div class="form-row">
+<div class="form-group">
+<label for="nokCountryCode">Country Code</label>
+<input
+type="text"
+id="nokCountryCode"
+name="nokCountryCode"
+placeholder="+234"
+required
+/>
+<div class="form-hint">Country code dropdown will be added later via backend API.</div>
+</div>
+
+<div class="form-group">
+<label for="nokPhone">Phone Number</label>
+<input
+type="tel"
+id="nokPhone"
+name="nokPhone"
+placeholder="8077765575"
+required
+/>
+</div>
+</div>
+
+<!-- Action Buttons -->
+<div class="form-actions">
+<button type="submit" class="btn-primary" id="submitBtn">
+Next: Academic Info
+</button>
+</div>
+
+<div class="form-note">
+This is step 2 of 4. Your data will be stored temporarily until you submit the full application.
+</div>
+</form>
+
+<div class="form-message" id="formMessage" style="display:none;"></div>
+
+<div class="apply-footer">
+Already have an account?
+<a href="login.html" class="footer-link">Login Here</a>
+</div>
+</div>
+</div>
+
+<script>
+// ---------- CONFIG ----------
+const API_BASE = 'http://localhost:3001';
+// ----------------------------
+
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+const body = document.body;
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  root.classList.add('dark-mode');
+  body.classList.remove('light-mode');
+  body.classList.add('dark-mode');
+  themeToggle.textContent = '☀️';
+} else {
+  root.classList.remove('dark-mode');
+  body.classList.remove('dark-mode');
+  body.classList.add('light-mode');
+  themeToggle.textContent = '🌙';
+}
+
+themeToggle.addEventListener('click', () => {
+  const isDark = root.classList.toggle('dark-mode');
+  if (isDark) {
+    body.classList.remove('light-mode');
+    body.classList.add('dark-mode');
+  } else {
+    body.classList.remove('dark-mode');
+    body.classList.add('light-mode');
+  }
+  themeToggle.textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+
+// API helper (same as other pages)
+async function callApi(endpoint, { method = 'POST', body = null } = {}) {
+  const res = await fetch(`${API_BASE}${endpoint}`, {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    body: body ? JSON.stringify(body) : null,
+                          credentials: 'include'
+  });
+  
+  const data = await res.json();
+  if (!res.ok) {
+    const err = new Error(data.error || 'Request failed');
+    err.status = res.status;
+    err.data = data;
+    throw err;
+  }
+  return data;
+}
+
+// Ensure applicant has completed Step 1
+const draftRaw = sessionStorage.getItem('applicantDraft');
+if (!draftRaw) {
+  // No draft – send back to Step 1
+  window.location.href = 'apply-biodata.html';
+}
+
+const draft = JSON.parse(draftRaw);
+
+// Form submission
+const nextOfKinForm = document.getElementById('nextOfKinForm');
+const formMessage = document.getElementById('formMessage');
+const submitBtn = document.getElementById('submitBtn');
+
+nextOfKinForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  formMessage.style.display = 'none';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Saving...';
+  
+  const payload = {
+    applicantId: draft.id,
+    nokFullName: document.getElementById('nokFullName').value.trim(),
+                               nokState: document.getElementById('nokState').value.trim(),
+                               nokCountry: document.getElementById('nokCountry').value.trim(),
+                               nokCountryCode: document.getElementById('nokCountryCode').value.trim(),
+                               nokPhone: document.getElementById('nokPhone').value.trim()
+  };
+  
+  try {
+    const data = await callApi('/api/applicants/register-step2', {
+      body: payload
+    });
+    
+    // Expect: { applicant: { id, email, step } }
+    const applicant = data.applicant;
+    
+    // Update draft in session
+    sessionStorage.setItem('applicantDraft', JSON.stringify({
+      id: applicant.id,
+      email: applicant.email,
+      step: 2
+    }));
+    
+    // Redirect to Step 3 (academic info – you’ll paste next)
+    window.location.href = 'apply-academic.html';
+  } catch (err) {
+    const msg = err?.data?.error || 'Failed to save next-of-kin data. Please try again.';
+    formMessage.textContent = msg;
+    formMessage.className = 'form-message error';
+    formMessage.style.display = 'block';
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Next: Academic Info';
+  }
+});
+</script>
+</body>
+</html>

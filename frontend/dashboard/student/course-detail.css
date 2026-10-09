@@ -1,0 +1,260 @@
+/* Course main header */
+.course-main-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.course-main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.course-main-code {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.course-main-title {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.course-main-meta {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.back-link {
+  font-size: 0.9rem;
+  color: #2563eb;
+  align-self: flex-start;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* Tabs */
+.course-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tab-btn:hover {
+  background: var(--notif-bg);
+  color: var(--text-primary);
+}
+
+.tab-btn.active {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+/* Tab contents */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Overview */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .overview-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.overview-text {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.overview-list {
+  margin-left: 1.2rem;
+  color: var(--text-secondary);
+}
+
+.overview-list li {
+  margin-bottom: 0.35rem;
+}
+
+/* Live schedule in overview */
+.live-schedule-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.live-schedule-item {
+  background: var(--notif-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.live-day {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.live-time,
+.live-platform {
+  margin-top: 0.1rem;
+}
+
+/* Materials */
+.materials-note,
+.assignments-note,
+.live-note,
+.grades-note {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.materials-list,
+.course-assignments-list,
+.live-classes-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.material-item,
+.course-assignment-item,
+.live-class-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--notif-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+}
+
+.material-info,
+.asgn-info,
+.live-class-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.material-title,
+.asgn-title,
+.live-class-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+
+.material-type,
+.asgn-meta,
+.live-class-time,
+.live-class-platform {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.asgn-status {
+  font-size: 0.8rem;
+  margin-top: 0.15rem;
+}
+
+.status-pending {
+  color: #f59e0b;
+}
+
+.status-graded {
+  color: #10b981;
+}
+
+.material-btn,
+.asgn-btn,
+.live-join-btn {
+  background: #2563eb;
+  color: #fff;
+  padding: 0.45rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.material-btn:hover,
+.asgn-btn:hover,
+.live-join-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Grades table */
+.grades-table-wrap {
+  overflow-x: auto;
+}
+
+.grades-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.grades-table th,
+.grades-table td {
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.grades-table th {
+  color: var(--text-primary);
+  font-weight: 600;
+  background: var(--notif-bg);
+}
+
+.grades-table tr:last-child td {
+  border-bottom: none;
+}
+
+.grades-table td strong,
+.grades-table th strong {
+  color: var(--text-primary);
+}

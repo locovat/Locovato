@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live Class Room – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student-dashboard.css" />
+  <link rel="stylesheet" href="live-room.css" />
+</head>
+<body class="live-room-body">
+  <!-- Top Bar (minimal) -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <div class="logo">E‑Learn Portal – Live Class</div>
+    </div>
+    <div class="top-bar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+      </button>
+      <div class="user-profile">
+        <img src="avatar.png" alt="User avatar" class="avatar" />
+        <span class="user-name">Dr. A. Johnson</span>
+        <span class="user-role">Lecturer</span>
+      </div>
+      <a href="staff-courses.html" class="logout-btn">Exit Class</a>
+    </div>
+  </header>
+
+  <div class="live-layout">
+    <!-- Main video area -->
+    <main class="live-main">
+      <!-- Session info bar -->
+      <div class="live-session-bar">
+        <div class="live-session-info">
+          <div class="live-session-code">CSC301</div>
+          <div class="live-session-title">Database Systems – Week 4: Normalization</div>
+        </div>
+        <div class="live-session-meta">
+          <span class="live-recording-status" id="recordingStatus">● Recording: OFF</span>
+        </div>
+      </div>
+
+      <!-- Video grid -->
+      <div class="live-video-grid" id="videoGrid">
+        <!-- Local video -->
+        <div class="video-tile local">
+          <div class="video-placeholder">
+            <div class="video-icon">📹</div>
+            <div class="video-label">You (Lecturer)</div>
+          </div>
+          <div class="video-controls-overlay">
+            <span class="mic-status">🎤 Unmuted</span>
+          </div>
+        </div>
+
+        <!-- Remote participant 1 -->
+        <div class="video-tile remote">
+          <div class="video-placeholder">
+            <div class="video-icon">👤</div>
+            <div class="video-label">John Doe</div>
+          </div>
+        </div>
+
+        <!-- Remote participant 2 -->
+        <div class="video-tile remote">
+          <div class="video-placeholder">
+            <div class="video-icon">👤</div>
+            <div class="video-label">Jane Smith</div>
+          </div>
+        </div>
+
+        <!-- More tiles will be added dynamically via WebRTC later -->
+      </div>
+
+      <!-- Controls bar -->
+      <div class="live-controls-bar">
+        <button class="control-btn" id="toggleMic" title="Toggle Mic">
+          🎤 <span class="control-label">Mic</span>
+        </button>
+        <button class="control-btn" id="toggleCam" title="Toggle Camera">
+          📹 <span class="control-label">Cam</span>
+        </button>
+        <button class="control-btn" id="shareScreen" title="Share Screen">
+          🖥️ <span class="control-label">Share</span>
+        </button>
+
+        <!-- Lecturer-only controls -->
+        <button class="control-btn lecturer-only" id="toggleRecording" title="Start/Stop Recording">
+          ⏺️ <span class="control-label">Record</span>
+        </button>
+        <button class="control-btn lecturer-only" id="endSession" title="End Session">
+          🛑 <span class="control-label">End</span>
+        </button>
+
+        <button class="control-btn" id="toggleChat" title="Toggle Chat">
+          💬 <span class="control-label">Chat</span>
+        </button>
+        <button class="control-btn" id="toggleParticipants" title="Toggle Participants">
+          👥 <span class="control-label">People</span>
+        </button>
+      </div>
+
+      <!-- TODO: Integrate WebRTC:
+           - Initialize local media (getUserMedia).
+           - Connect to signaling server (WebSocket/Socket.IO).
+           - Create/join room, exchange SDP/ICE.
+           - Add remote streams to #videoGrid.
+           - Implement screen share.
+           - Implement recording (via SFU/media server).
+      -->
+    </main>
+
+    <!-- Chat sidebar -->
+    <aside class="live-sidebar" id="liveSidebar">
+      <div class="sidebar-tabs">
+        <button class="sidebar-tab active" data-panel="chat">Chat</button>
+        <button class="sidebar-tab" data-panel="participants">Participants</button>
+      </div>
+
+      <!-- Chat panel -->
+      <div class="sidebar-panel active" id="chatPanel">
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-message system">
+            <div class="chat-meta">System • Now</div>
+            <div class="chat-text">Welcome to the live class. Chat messages will appear here.</div>
+          </div>
+          <!-- More messages will be added dynamically -->
+        </div>
+        <form class="chat-input-form" id="chatForm">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." />
+          <button type="submit" class="chat-send-btn">Send</button>
+        </form>
+        <!-- TODO: Connect chat to signaling server / backend -->
+      </div>
+
+      <!-- Participants panel -->
+      <div class="sidebar-panel" id="participantsPanel">
+        <div class="participants-list">
+          <div class="participant-item">
+            <div class="participant-avatar">👤</div>
+            <div class="participant-info">
+              <div class="participant-name">Dr. A. Johnson (Lecturer)</div>
+              <div class="participant-status">You • Mic On • Cam On</div>
+            </div>
+          </div>
+          <div class="participant-item">
+            <div class="participant-avatar">👤</div>
+            <div class="participant-info">
+              <div class="participant-name">John Doe</div>
+              <div class="participant-status">Student • Mic Off • Cam On</div>
+            </div>
+          </div>
+          <div class="participant-item">
+            <div class="participant-avatar">👤</div>
+            <div class="participant-info">
+              <div class="participant-name">Jane Smith</div>
+              <div class="participant-status">Student • Mic On • Cam Off</div>
+            </div>
+          </div>
+          <!-- More participants will be added dynamically -->
+        </div>
+        <!-- TODO: Sync participants list with signaling server -->
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    // Theme toggle (same logic as other pages)
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Sidebar tabs (Chat / Participants)
+    const sidebarTabs = document.querySelectorAll('.sidebar-tab');
+    const sidebarPanels = document.querySelectorAll('.sidebar-panel');
+
+    sidebarTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.panel;
+
+        sidebarTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        sidebarPanels.forEach(panel => {
+          panel.classList.toggle('active', panel.id === target + 'Panel');
+        });
+      });
+    });
+
+    // Chat form (demo only)
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      const msgEl = document.createElement('div');
+      msgEl.className = 'chat-message user';
+      msgEl.innerHTML = `
+        <div class="chat-meta">You • Now</div>
+        <div class="chat-text">${text}</div>
+      `;
+      chatMessages.appendChild(msgEl);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      chatInput.value = '';
+
+      // TODO: Send message via signaling server / backend
+    });
+
+    // Control buttons (demo only)
+    const toggleMic = document.getElementById('toggleMic');
+    const toggleCam = document.getElementById('toggleCam');
+    const shareScreen = document.getElementById('shareScreen');
+    const toggleRecording = document.getElementById('toggleRecording');
+    const endSession = document.getElementById('endSession');
+    const recordingStatus = document.getElementById('recordingStatus');
+
+    let isMicOn = true;
+    let isCamOn = true;
+    let isRecording = false;
+
+    toggleMic.addEventListener('click', () => {
+      isMicOn = !isMicOn;
+      toggleMic.innerHTML = isMicOn
+        ? '🎤 <span class="control-label">Mic</span>'
+        : '🔇 <span class="control-label">Mic</span>';
+      // TODO: Actually toggle audio track
+    });
+
+    toggleCam.addEventListener('click', () => {
+      isCamOn = !isCamOn;
+      toggleCam.innerHTML = isCamOn
+        ? '📹 <span class="control-label">Cam</span>'
+        : '🚫 <span class="control-label">Cam</span>';
+      // TODO: Actually toggle video track
+    });
+
+    shareScreen.addEventListener('click', () => {
+      alert('Screen share will be implemented with WebRTC getDisplayMedia().');
+      // TODO: navigator.mediaDevices.getDisplayMedia()
+    });
+
+    toggleRecording.addEventListener('click', () => {
+      isRecording = !isRecording;
+      recordingStatus.textContent = isRecording
+        ? '● Recording: ON'
+        : '● Recording: OFF';
+      recordingStatus.style.color = isRecording ? '#ef4444' : '';
+      // TODO: Signal backend/SFU to start/stop recording
+    });
+
+    endSession.addEventListener('click', () => {
+      if (!confirm('End this live class session for all participants?')) return;
+      // TODO: Notify server to end session, close connections, finalize recording
+      alert('Session ended (demo). Backend integration required.');
+    });
+
+    // TODO: On page load:
+    // - Parse session ID from URL (?session=...)
+    // - Initialize local media (getUserMedia).
+    // - Connect to signaling server and join room.
+    // - Render remote participants and their streams.
+  </script>
+</body>
+</html>

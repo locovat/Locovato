@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Apply – Step 3 – Threshing Floor International</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="apply-biodata.css" />
+</head>
+<body class="login-body light-mode">
+  <div class="login-background">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <div class="login-wrapper">
+    <button class="theme-toggle-absolute" id="themeToggle" aria-label="Toggle theme">
+      🌙
+    </button>
+
+    <div class="marquee-banner">
+      <div class="marquee-content">
+        <span>Applicant Registration – Step 3 of 5: Academic & Account</span>
+        <span aria-hidden="true"> • </span>
+        <span>Select your program and create your password</span>
+        <span aria-hidden="true"> • </span>
+      </div>
+    </div>
+
+    <div class="login-card apply-card">
+      <div class="login-header">
+        <div class="login-logo">Threshing Floor International</div>
+        <img src="images/tflogo.jpg" alt="Threshing Floor International Logo" style="display:block; max-width:120px; height:auto; margin:0.75rem auto;">
+        <h1>Application Form – Step 3</h1>
+        <p class="login-subtitle">Academic & Account Information</p>
+      </div>
+
+      <form class="login-form apply-form" id="academicForm">
+        <!-- Academic Info -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="programCode">Program Code</label>
+            <select id="programCode" name="programCode" required>
+              <option value="">Select code</option>
+              <option value="CS">CS - Computer Science</option>
+              <option value="IT">IT - Information Technology</option>
+              <option value="SE">SE - Software Engineering</option>
+              <option value="CYBER">CYBER - Cyber Security</option>
+              <option value="DS">DS - Data Science</option>
+              <option value="AI">AI - Artificial Intelligence</option>
+              <option value="EE">EE - Electrical Engineering</option>
+              <option value="ME">ME - Mechanical Engineering</option>
+              <option value="CE">CE – Civil Engineering</option>
+              <option value="CHE">CHE – Chemical Engineering</option>
+              <option value="BUS">BUS – Business Administration</option>
+              <option value="ACC">ACC – Accounting</option>
+              <option value="ECO">ECO – Economics</option>
+              <option value="BIO">BIO – Biology</option>
+              <option value="CHEM">CHEM – Chemistry</option>
+              <option value="PHY">PHY – Physics</option>
+              <option value="MATH">MATH – Mathematics</option>
+              <option value="STAT">STAT – Statistics</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="programName">Program Name</label>
+            <input
+              type="text"
+              id="programName"
+              name="programName"
+              placeholder="e.g. Computer Science"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="entryLevel">Entry Level</label>
+            <select id="entryLevel" name="entryLevel" required>
+              <option value="">Select</option>
+              <option value="100">100 Level</option>
+              <option value="200">200 Level</option>
+              <option value="300">300 Level</option>
+              <option value="400">400 Level</option>
+              <option value="direct">Direct Entry</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="studyMode">Study Mode</label>
+            <select id="studyMode" name="studyMode" required>
+              <option value="">Select</option>
+              <option value="full-time">Full-Time</option>
+              <option value="part-time">Part-Time</option>
+              <option value="distance">Distance Learning</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="preferredSession">Preferred Session (Optional)</label>
+            <input
+              type="text"
+              id="preferredSession"
+              name="preferredSession"
+              placeholder="e.g. 2025/2026"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="preferredSemester">Preferred Semester (Optional)</label>
+            <select id="preferredSemester" name="preferredSemester">
+              <option value="">Select</option>
+              <option value="first">First Semester</option>
+              <option value="second">Second Semester</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Account Info -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              required
+              minlength="8"
+            />
+            <div class="apply-note" style="text-align:left;">
+              Minimum 8 characters.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="••••••••"
+              required
+              minlength="8"
+            />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary btn-block" id="submitBtn">
+            Next: Upload Credentials
+          </button>
+        </div>
+
+        <div class="apply-note">
+          This is step 3 of 5. After this, you'll upload your credentials before final review.
+        </div>
+      </form>
+
+      <div class="apply-error" id="applyError" style="display:none;"></div>
+    </div>
+
+    <div class="login-signup">
+      Already have an account?
+      <a href="login.html" class="signup-link">Login Here</a>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:3001';
+
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const body = document.body;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      if (isDark) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+      } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+      }
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Ensure applicant has completed Steps 1–2
+    const draftRaw = sessionStorage.getItem('applicantDraft');
+    if (!draftRaw) {
+      window.location.href = 'apply-biodata.html';
+    }
+
+    const academicForm = document.getElementById('academicForm');
+    const applyError = document.getElementById('applyError');
+    const submitBtn = document.getElementById('submitBtn');
+
+    academicForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      applyError.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Saving...';
+
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (password !== confirmPassword) {
+        applyError.textContent = 'Passwords do not match. Please try again.';
+        applyError.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Next: Upload Credentials';
+        return;
+      }
+
+      const programCode = document.getElementById('programCode').value;
+      const programName = document.getElementById('programName').value.trim();
+      const entryLevel = document.getElementById('entryLevel').value;
+      const studyMode = document.getElementById('studyMode').value;
+      const preferredSession = document.getElementById('preferredSession').value.trim() || null;
+      const preferredSemester = document.getElementById('preferredSemester').value || null;
+
+      const payload = {
+        programCode,
+        programName,
+        entryLevel,
+        studyMode,
+        preferredSession,
+        preferredSemester,
+        password
+      };
+
+      console.log('Step 3 payload:', payload);
+
+      if (!programCode || !programName || !entryLevel || !studyMode) {
+        applyError.textContent = 'Please fill in all required academic fields.';
+        applyError.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Next: Upload Credentials';
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/api/applicants/register-step3`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          credentials: 'include'
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || 'Request failed');
+        }
+
+        const applicant = data.applicant;
+
+        sessionStorage.setItem('applicantDraft', JSON.stringify({
+          id: applicant.id,
+          email: applicant.email,
+          step: 3
+        }));
+
+        window.location.href = 'apply-upload.html';
+      } catch (err) {
+        applyError.textContent = err.message || 'Failed to save academic info. Please try again.';
+        applyError.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Next: Upload Credentials';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sessions – Admin Portal – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student-dashboard.css" />
+  <link rel="stylesheet" href="admin-sessions.css" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+      <div class="logo">E‑Learn Portal</div>
+    </div>
+    <div class="top-bar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+      </button>
+
+      <div class="notifications">
+        <span class="notif-badge">2</span>
+        🔔
+      </div>
+      <div class="user-profile">
+        <img src="avatar.png" alt="Admin avatar" class="avatar" />
+        <span class="user-name">System Admin</span>
+        <span class="user-role">Admin</span>
+      </div>
+      <a href="#" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <a href="admin-dashboard.html" class="nav-item">🏠 Dashboard</a>
+        <a href="admin-users.html" class="nav-item">👥 Users</a>
+        <a href="admin-courses.html" class="nav-item">📚 Courses</a>
+        <a href="admin-sessions.html" class="nav-item active">🗓️ Sessions</a>
+        <a href="admin-settings.html" class="nav-item">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="page-header">
+        <h1>Sessions</h1>
+        <p class="page-subtitle">Manage academic sessions and semesters</p>
+      </section>
+
+      <!-- Add Session -->
+      <section class="section-panel">
+        <div class="panel">
+          <h2>Add Session</h2>
+          <p class="section-note">Create a new academic session/semester.</p>
+
+          <form class="section-form" id="addSessionForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="session-year">Session Year</label>
+                <input type="text" id="session-year" placeholder="e.g. 2025/2026" required />
+              </div>
+
+              <div class="form-group">
+                <label for="session-semester">Semester</label>
+                <select id="session-semester" required>
+                  <option value="first">First Semester</option>
+                  <option value="second">Second Semester</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="session-start">Start Date</label>
+                <input type="date" id="session-start" required />
+              </div>
+
+              <div class="form-group">
+                <label for="session-end">End Date</label>
+                <input type="date" id="session-end" required />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Add Session</button>
+            </div>
+          </form>
+
+          <!-- TODO: Connect to backend to create session -->
+        </div>
+      </section>
+
+      <!-- Sessions List -->
+      <section class="section-panel">
+        <div class="panel">
+          <h2>All Sessions</h2>
+          <p class="section-note">View and manage academic sessions and semesters.</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Session</th>
+                  <th>Semester</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="sessionsTableBody">
+                <tr>
+                  <td>2025/2026</td>
+                  <td>First Semester</td>
+                  <td>2025-09-01</td>
+                  <td>2026-01-31</td>
+                  <td><span class="status-badge status-active">Active</span></td>
+                  <td>
+                    <button class="btn-tiny deactivate-session-btn">Deactivate</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2024/2025</td>
+                  <td>Second Semester</td>
+                  <td>2025-02-01</td>
+                  <td>2025-06-30</td>
+                  <td><span class="status-badge status-inactive">Inactive</span></td>
+                  <td>
+                    <button class="btn-tiny activate-session-btn">Activate</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2024/2025</td>
+                  <td>First Semester</td>
+                  <td>2024-09-01</td>
+                  <td>2025-01-31</td>
+                  <td><span class="status-badge status-inactive">Inactive</span></td>
+                  <td>
+                    <button class="btn-tiny activate-session-btn">Activate</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Add session form (demo only)
+    const addSessionForm = document.getElementById('addSessionForm');
+    const sessionsTableBody = document.getElementById('sessionsTableBody');
+
+    addSessionForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const year = document.getElementById('session-year').value.trim();
+      const semesterVal = document.getElementById('session-semester').value;
+      const start = document.getElementById('session-start').value;
+      const end = document.getElementById('session-end').value;
+
+      if (!year || !start || !end) {
+        alert('All fields are required.');
+        return;
+      }
+
+      const semesterLabel = semesterVal === 'first' ? 'First Semester' : 'Second Semester';
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${year}</td>
+        <td>${semesterLabel}</td>
+        <td>${start}</td>
+        <td>${end}</td>
+        <td><span class="status-badge status-inactive">Inactive</span></td>
+        <td>
+          <button class="btn-tiny activate-session-btn">Activate</button>
+        </td>
+      `;
+      sessionsTableBody.prepend(row);
+
+      addSessionForm.reset();
+
+      // TODO: Save session to backend
+      alert('Session added (demo). Backend integration required.');
+    });
+
+    // Activate/Deactivate buttons (demo)
+    document.querySelectorAll('.activate-session-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!confirm('Activate this session? Only one session should be active at a time.')) return;
+        // TODO: Call backend to activate session, deactivate others
+        alert('Session activated (demo). Backend integration required.');
+      });
+    });
+
+    document.querySelectorAll('.deactivate-session-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!confirm('Deactivate this session?')) return;
+        // TODO: Call backend to deactivate session
+        alert('Session deactivated (demo). Backend integration required.');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Results Processing – HOD Portal – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student-dashboard.css" />
+  <link rel="stylesheet" href="hod-results.css" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+      <div class="logo">E‑Learn Portal</div>
+    </div>
+    <div class="top-bar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+      </button>
+
+      <div class="notifications">
+        <span class="notif-badge">2</span>
+        🔔
+      </div>
+      <div class="user-profile">
+        <img src="avatar.png" alt="HOD avatar" class="avatar" />
+        <span class="user-name">Prof. K. Adeyemi</span>
+        <span class="user-role">HOD</span>
+      </div>
+      <a href="#" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <a href="hod-dashboard.html" class="nav-item">🏠 Dashboard</a>
+        <a href="hod-courses.html" class="nav-item">📚 Courses</a>
+        <a href="hod-score-sheets.html" class="nav-item">📋 Score Sheets</a>
+        <a href="hod-results.html" class="nav-item active">📊 Results Processing</a>
+        <a href="hod-notifications.html" class="nav-item">📢 Notifications</a>
+        <a href="#" class="nav-item">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="page-header">
+        <h1>Results Processing</h1>
+        <p class="page-subtitle">Accumulate approved score sheets, compute GPA/CGPA, and upload results to student portal</p>
+      </section>
+
+      <!-- Session / Level Selector -->
+      <section class="section-panel">
+        <div class="panel">
+          <h2>Select Processing Batch</h2>
+          <p class="section-note">Choose session, semester, and level to process results.</p>
+
+          <form class="section-form" id="processBatchForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="session">Session</label>
+                <select id="session" name="session" required>
+                  <option value="2025-2026">2025/2026</option>
+                  <option value="2024-2025">2024/2025</option>
+                  <option value="2023-2024">2023/2024</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="semester">Semester</label>
+                <select id="semester" name="semester" required>
+                  <option value="first">First Semester</option>
+                  <option value="second">Second Semester</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="level">Level</label>
+                <select id="level" name="level" required>
+                  <option value="100">100</option>
+                  <option value="200">200</option>
+                  <option value="300">300</option>
+                  <option value="400">400</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Load Batch</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Batch Summary -->
+      <section class="section-panel" id="batchSummarySection" style="display:none;">
+        <div class="panel">
+          <h2>Batch Summary</h2>
+          <p class="section-note">Overview of approved score sheets for this batch.</p>
+
+          <div class="summary-cards">
+            <div class="summary-card">
+              <div class="summary-label">Total Courses</div>
+              <div class="summary-value" id="totalCourses">-</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">Approved Score Sheets</div>
+              <div class="summary-value" id="approvedSheets">-</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">Total Students</div>
+              <div class="summary-value" id="totalStudents">-</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">Status</div>
+              <div class="summary-value" id="batchStatus">Not Processed</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Approved Score Sheets -->
+      <section class="section-panel" id="scoreSheetsSection" style="display:none;">
+        <div class="panel">
+          <h2>Approved Score Sheets</h2>
+          <p class="section-note">These score sheets will be used for GPA/CGPA computation.</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Course Code</th>
+                  <th>Course Title</th>
+                  <th>Lecturer</th>
+                  <th>Students</th>
+                  <th>Last Updated</th>
+                </tr>
+              </thead>
+              <tbody id="approvedSheetsBody">
+                <!-- Populated via JS (demo) -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-secondary" id="recomputeBtn">Recompute GPA/CGPA</button>
+            <button class="btn-primary" id="processBatchBtn">Process & Upload Results</button>
+          </div>
+
+          <!-- TODO: Connect to backend:
+               - Fetch approved score sheets for selected batch.
+               - Run GPA/CGPA computation.
+               - Upload final results to student portal.
+          -->
+        </div>
+      </section>
+
+      <!-- Processing Log -->
+      <section class="section-panel" id="logSection" style="display:none;">
+        <div class="panel">
+          <h2>Processing Log</h2>
+          <p class="section-note">Recent actions for this batch.</p>
+
+          <ul class="log-list" id="processLog">
+            <!-- Example log entries -->
+            <li class="log-item">
+              <span class="log-time">2026-09-20 14:30</span>
+              <span class="log-text">Batch created for 2025/2026 – First Semester, Level 300.</span>
+            </li>
+            <li class="log-item">
+              <span class="log-time">2026-09-21 10:15</span>
+              <span class="log-text">All required score sheets approved.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Demo data for approved score sheets
+    const demoSheets = [
+      { code: 'CSC301', title: 'Database Systems', lecturer: 'Dr. A. Johnson', students: 42, updated: '20 Sep 2026' },
+      { code: 'CSC304', title: 'Computer Networks', lecturer: 'Mr. T. Ibrahim', students: 38, updated: '18 Sep 2026' },
+      { code: 'CSC305', title: 'Software Engineering', lecturer: 'Prof. K. Adeyemi', students: 45, updated: '15 Sep 2026' },
+      { code: 'CSC310', title: 'Artificial Intelligence', lecturer: 'Dr. L. Mohammed', students: 30, updated: '12 Sep 2026' }
+    ];
+
+    const processBatchForm = document.getElementById('processBatchForm');
+    const batchSummarySection = document.getElementById('batchSummarySection');
+    const scoreSheetsSection = document.getElementById('scoreSheetsSection');
+    const logSection = document.getElementById('logSection');
+
+    const totalCoursesEl = document.getElementById('totalCourses');
+    const approvedSheetsEl = document.getElementById('approvedSheets');
+    const totalStudentsEl = document.getElementById('totalStudents');
+    const batchStatusEl = document.getElementById('batchStatus');
+    const approvedSheetsBody = document.getElementById('approvedSheetsBody');
+    const processLog = document.getElementById('processLog');
+
+    const recomputeBtn = document.getElementById('recomputeBtn');
+    const processBatchBtn = document.getElementById('processBatchBtn');
+
+    processBatchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const session = document.getElementById('session').value;
+      const semester = document.getElementById('semester').value;
+      const level = document.getElementById('level').value;
+
+      // Show sections
+      batchSummarySection.style.display = 'block';
+      scoreSheetsSection.style.display = 'block';
+      logSection.style.display = 'block';
+
+      // Demo summary values
+      totalCoursesEl.textContent = demoSheets.length;
+      approvedSheetsEl.textContent = demoSheets.length;
+      const totalStudents = demoSheets.reduce((sum, s) => sum + s.students, 0);
+      totalStudentsEl.textContent = totalStudents;
+      batchStatusEl.textContent = 'Ready for Processing';
+
+      // Populate approved sheets table
+      let html = '';
+      demoSheets.forEach(s => {
+        html += `
+          <tr>
+            <td>${s.code}</td>
+            <td>${s.title}</td>
+            <td>${s.lecturer}</td>
+            <td>${s.students}</td>
+            <td>${s.updated}</td>
+          </tr>
+        `;
+      });
+      approvedSheetsBody.innerHTML = html;
+
+      // Add log entry
+      const now = new Date();
+      const timeStr = now.toISOString().slice(0, 16).replace('T', ' ');
+      const logEntry = document.createElement('li');
+      logEntry.className = 'log-item';
+      logEntry.innerHTML = `
+        <span class="log-time">${timeStr}</span>
+        <span class="log-text">Batch loaded for ${session.replace('-', '/')} – ${semester === 'first' ? 'First' : 'Second'} Semester, Level ${level}.</span>
+      `;
+      processLog.prepend(logEntry);
+
+      // TODO: In real app, fetch batch data from API instead of demoSheets
+    });
+
+    recomputeBtn.addEventListener('click', () => {
+      if (!confirm('Recompute GPA/CGPA for this batch?')) return;
+      // TODO: Call backend to recompute
+      alert('GPA/CGPA recomputation triggered (demo). Backend integration required.');
+    });
+
+    processBatchBtn.addEventListener('click', () => {
+      if (!confirm('Process this batch and upload results to the student portal?')) return;
+      // TODO: Call backend to:
+      // - Validate all required score sheets are approved.
+      // - Compute GPA/CGPA per student.
+      // - Save results.
+      // - Mark batch as processed.
+      // - Optionally notify students.
+      batchStatusEl.textContent = 'Processed & Uploaded';
+      const now = new Date();
+      const timeStr = now.toISOString().slice(0, 16).replace('T', ' ');
+      const logEntry = document.createElement('li');
+      logEntry.className = 'log-item';
+      logEntry.innerHTML = `
+        <span class="log-time">${timeStr}</span>
+        <span class="log-text">Batch processed and results uploaded to student portal.</span>
+      `;
+      processLog.prepend(logEntry);
+      alert('Results processed and uploaded (demo). Backend integration required.');
+    });
+  </script>
+</body>
+</html>

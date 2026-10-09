@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Courses – HOD Portal – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student-dashboard.css" />
+  <link rel="stylesheet" href="hod-courses.css" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+      <div class="logo">E‑Learn Portal</div>
+    </div>
+    <div class="top-bar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+      </button>
+
+      <div class="notifications">
+        <span class="notif-badge">2</span>
+        🔔
+      </div>
+      <div class="user-profile">
+        <img src="avatar.png" alt="HOD avatar" class="avatar" />
+        <span class="user-name">Prof. K. Adeyemi</span>
+        <span class="user-role">HOD</span>
+      </div>
+      <a href="#" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <a href="hod-dashboard.html" class="nav-item">🏠 Dashboard</a>
+        <a href="hod-courses.html" class="nav-item active">📚 Courses</a>
+        <a href="hod-score-sheets.html" class="nav-item">📋 Score Sheets</a>
+        <a href="hod-results.html" class="nav-item">📊 Results Processing</a>
+        <a href="hod-notifications.html" class="nav-item">📢 Notifications</a>
+        <a href="#" class="nav-item">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="page-header">
+        <h1>Courses</h1>
+        <p class="page-subtitle">Assign courses to staff and manage course–staff mapping</p>
+      </section>
+
+      <!-- Session / Semester Selector -->
+      <section class="section-panel">
+        <div class="panel">
+          <h2>Select Session & Semester</h2>
+          <p class="section-note">Choose the academic session and semester to manage courses.</p>
+
+          <form class="section-form" id="sessionForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="session">Session</label>
+                <select id="session" name="session" required>
+                  <option value="2025-2026">2025/2026</option>
+                  <option value="2024-2025">2024/2025</option>
+                  <option value="2023-2024">2023/2024</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="semester">Semester</label>
+                <select id="semester" name="semester" required>
+                  <option value="first">First Semester</option>
+                  <option value="second">Second Semester</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Load Courses</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Courses List -->
+      <section class="section-panel">
+        <div class="panel">
+          <h2>Courses for <span id="sessionLabel">2025/2026 – First Semester</span></h2>
+          <p class="section-note">Assign or reassign courses to staff members.</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Course Code</th>
+                  <th>Course Title</th>
+                  <th>Units</th>
+                  <th>Level</th>
+                  <th>Assigned Staff</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="coursesTableBody">
+                <tr>
+                  <td>CSC301</td>
+                  <td>Database Systems</td>
+                  <td>3</td>
+                  <td>300</td>
+                  <td>Dr. A. Johnson</td>
+                  <td>
+                    <button class="btn-small open-assign-modal" data-course="CSC301" data-title="Database Systems">
+                      Assign / Reassign
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>CSC304</td>
+                  <td>Computer Networks</td>
+                  <td>3</td>
+                  <td>300</td>
+                  <td>Mr. T. Ibrahim</td>
+                  <td>
+                    <button class="btn-small open-assign-modal" data-course="CSC304" data-title="Computer Networks">
+                      Assign / Reassign
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>CSC305</td>
+                  <td>Software Engineering</td>
+                  <td>3</td>
+                  <td>300</td>
+                  <td>Prof. K. Adeyemi</td>
+                  <td>
+                    <button class="btn-small open-assign-modal" data-course="CSC305" data-title="Software Engineering">
+                      Assign / Reassign
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>CSC310</td>
+                  <td>Artificial Intelligence</td>
+                  <td>3</td>
+                  <td>300</td>
+                  <td>Dr. L. Mohammed</td>
+                  <td>
+                    <button class="btn-small open-assign-modal" data-course="CSC310" data-title="Artificial Intelligence">
+                      Assign / Reassign
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>CSC312</td>
+                  <td>Machine Learning</td>
+                  <td>3</td>
+                  <td>300</td>
+                  <td>-</td>
+                  <td>
+                    <button class="btn-small open-assign-modal" data-course="CSC312" data-title="Machine Learning">
+                      Assign / Reassign
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Assign Course Modal -->
+  <div class="modal-backdrop" id="assignModalBackdrop" style="display:none;">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Assign Course</h3>
+        <button class="modal-close" id="closeAssignModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="assignCourseForm">
+          <div class="form-group">
+            <label for="assign-course-code">Course Code</label>
+            <input type="text" id="assign-course-code" readonly />
+          </div>
+          <div class="form-group">
+            <label for="assign-course-title">Course Title</label>
+            <input type="text" id="assign-course-title" readonly />
+          </div>
+          <div class="form-group">
+            <label for="assign-staff">Staff Member</label>
+            <select id="assign-staff" required>
+              <option value="">Select staff</option>
+              <option value="STAFF001">Dr. A. Johnson</option>
+              <option value="STAFF002">Mr. T. Ibrahim</option>
+              <option value="STAFF003">Prof. K. Adeyemi</option>
+              <option value="STAFF004">Dr. L. Mohammed</option>
+              <option value="STAFF005">Mr. P. Eze</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="assign-responsibility">Responsibility</label>
+            <select id="assign-responsibility" required>
+              <option value="teaching-grading">Teaching & Grading</option>
+              <option value="teaching-only">Teaching Only</option>
+              <option value="grading-only">Grading Only</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" id="cancelAssign">Cancel</button>
+            <button type="submit" class="btn-primary">Save Assignment</button>
+          </div>
+        </form>
+        <!-- TODO: Connect to backend to save course–staff assignment -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Session form (demo only)
+    const sessionForm = document.getElementById('sessionForm');
+    const sessionLabel = document.getElementById('sessionLabel');
+
+    sessionForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const session = document.getElementById('session').value;
+      const semester = document.getElementById('semester').value;
+      const label = `${session.replace('-', '/')} – ${semester === 'first' ? 'First' : 'Second'} Semester`;
+      sessionLabel.textContent = label;
+      // TODO: Load courses from API for this session/semester
+    });
+
+    // Assign modal logic
+    const assignModalBackdrop = document.getElementById('assignModalBackdrop');
+    const closeAssignModalBtn = document.getElementById('closeAssignModal');
+    const cancelAssignBtn = document.getElementById('cancelAssign');
+    const assignCourseCodeInput = document.getElementById('assign-course-code');
+    const assignCourseTitleInput = document.getElementById('assign-course-title');
+    const openAssignButtons = document.querySelectorAll('.open-assign-modal');
+
+    function openAssignModal(courseCode, courseTitle) {
+      assignCourseCodeInput.value = courseCode;
+      assignCourseTitleInput.value = courseTitle;
+      assignModalBackdrop.style.display = 'flex';
+    }
+
+    function closeAssignModal() {
+      assignModalBackdrop.style.display = 'none';
+    }
+
+    openAssignButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        openAssignModal(btn.dataset.course, btn.dataset.title);
+      });
+    });
+
+    closeAssignModalBtn.addEventListener('click', closeAssignModal);
+    cancelAssignBtn.addEventListener('click', closeAssignModal);
+
+    assignModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === assignModalBackdrop) {
+        closeAssignModal();
+      }
+    });
+
+    const assignCourseForm = document.getElementById('assignCourseForm');
+    assignCourseForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // TODO: Send assignment to backend
+      alert('Course assignment will be saved to the backend later.');
+      closeAssignModal();
+    });
+  </script>
+</body>
+</html>

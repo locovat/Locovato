@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Assignments – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student-dashboard.css" />
+  <link rel="stylesheet" href="assignments.css" />
+</head>
+<body>
+<!-- Top Bar (same as dashboard) -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+      <div class="logo">E‑Learn Portal</div>
+    </div>
+    <div class="top-bar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+      </button>
+
+      <div class="notifications">
+        <span class="notif-badge">2</span>
+        🔔
+      </div>
+      <div class="user-profile">
+        <img src="avatar.png" alt="Student avatar" class="avatar" />
+        <span class="user-name">John Doe</span>
+        <span class="user-role">Student</span>
+      </div>
+      <a href="#" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar (same as dashboard) -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <a href="student.html" class="nav-item">🏠 Dashboard</a>
+        <a href="my-courses.html" class="nav-item active">📚 My Courses</a>
+        <a href="assignments.html" class="nav-item">📝 Assignments</a>
+        <a href="live-classes.html" class="nav-item">📅 Live Classes</a>
+        <a href="fees.html" class="nav-item">💳 Fees & Payments</a>
+        <a href="results.html" class="nav-item">📊 Results & GPA</a>
+        <a href="#" class="nav-item">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="page-header">
+        <h1>Assignments</h1>
+        <p class="page-subtitle">View and submit assignments for all your courses</p>
+      </section>
+
+      <!-- Filters -->
+      <section class="filters-bar">
+        <div class="filter-group">
+          <label for="filter-course">Course:</label>
+          <select id="filter-course">
+            <option value="all">All Courses</option>
+            <option value="CSC301">CSC301 – Database Systems</option>
+            <option value="CSC304">CSC304 – Computer Networks</option>
+            <option value="CSC305">CSC305 – Software Engineering</option>
+            <option value="MTH301">MTH301 – Numerical Methods</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-status">Status:</label>
+          <select id="filter-status">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="submitted">Submitted</option>
+            <option value="graded">Graded</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="search-assignment">Search:</label>
+          <input type="text" id="search-assignment" placeholder="Assignment title" />
+        </div>
+      </section>
+
+      <!-- Assignments List -->
+      <section class="assignments-section">
+        <div class="panel">
+          <h2>All Assignments</h2>
+          <p class="assignments-note">Filter by course and status to quickly find what you need.</p>
+
+          <div class="assignments-table-wrap">
+            <table class="assignments-table">
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th>Assignment</th>
+                  <th>Due Date</th>
+                  <th>Max Score</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Row 1 -->
+                <tr>
+                  <td>
+                    <div class="course-cell">
+                      <div class="course-code-cell">CSC301</div>
+                      <div class="course-title-cell">Database Systems</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="assignment-cell">
+                      <div class="asgn-title-cell">Assignment 1 – ER Diagram</div>
+                      <div class="asgn-desc-cell">Design an ER diagram for a library system.</div>
+                    </div>
+                  </td>
+                  <td>28 Sep 2026</td>
+                  <td>100</td>
+                  <td>
+                    <span class="status-badge status-pending">Pending</span>
+                  </td>
+                  <td>
+                    <a href="#" class="action-btn-small">Submit</a>
+                  </td>
+                </tr>
+
+                <!-- Row 2 -->
+                <tr>
+                  <td>
+                    <div class="course-cell">
+                      <div class="course-code-cell">CSC301</div>
+                      <div class="course-title-cell">Database Systems</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="assignment-cell">
+                      <div class="asgn-title-cell">Assignment 2 – SQL Queries</div>
+                      <div class="asgn-desc-cell">Write SQL queries for given scenarios.</div>
+                    </div>
+                  </td>
+                  <td>10 Oct 2026</td>
+                  <td>100</td>
+                  <td>
+                    <span class="status-badge status-graded">Graded (85/100)</span>
+                  </td>
+                  <td>
+                    <a href="#" class="action-btn-small">View Feedback</a>
+                  </td>
+                </tr>
+
+                <!-- Row 3 -->
+                <tr>
+                  <td>
+                    <div class="course-cell">
+                      <div class="course-code-cell">CSC304</div>
+                      <div class="course-title-cell">Computer Networks</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="assignment-cell">
+                      <div class="asgn-title-cell">Assignment 1 – OSI Model</div>
+                      <div class="asgn-desc-cell">Explain layers of OSI model with examples.</div>
+                    </div>
+                  </td>
+                  <td>25 Sep 2026</td>
+                  <td>50</td>
+                  <td>
+                    <span class="status-badge status-submitted">Submitted</span>
+                  </td>
+                  <td>
+                    <a href="#" class="action-btn-small">View Submission</a>
+                  </td>
+                </tr>
+
+                <!-- Row 4 -->
+                <tr>
+                  <td>
+                    <div class="course-cell">
+                      <div class="course-code-cell">CSC305</div>
+                      <div class="course-title-cell">Software Engineering</div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="assignment-cell">
+                      <div class="asgn-title-cell">Assignment 1 – SRS Document</div>
+                      <div class="asgn-desc-cell">Prepare SRS for a student portal system.</div>
+                    </div>
+                     <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+    });
+
+    // Theme toggle (same logic as dashboard)
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

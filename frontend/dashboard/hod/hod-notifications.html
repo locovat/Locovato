@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Notifications – HOD Portal – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="student-dashboard.css" />
+  <link rel="stylesheet" href="hod-notifications.css" />
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        ☰
+      </button>
+      <div class="logo">E‑Learn Portal</div>
+    </div>
+    <div class="top-bar-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        🌙
+      </button>
+
+      <div class="notifications">
+        <span class="notif-badge">2</span>
+        🔔
+      </div>
+      <div class="user-profile">
+        <img src="avatar.png" alt="HOD avatar" class="avatar" />
+        <span class="user-name">Prof. K. Adeyemi</span>
+        <span class="user-role">HOD</span>
+      </div>
+      <a href="#" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <a href="hod-dashboard.html" class="nav-item">🏠 Dashboard</a>
+        <a href="hod-courses.html" class="nav-item">📚 Courses</a>
+        <a href="hod-score-sheets.html" class="nav-item">📋 Score Sheets</a>
+        <a href="hod-results.html" class="nav-item">📊 Results Processing</a>
+        <a href="hod-notifications.html" class="nav-item active">📢 Notifications</a>
+        <a href="#" class="nav-item">⚙️ Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <section class="page-header">
+        <h1>Notifications</h1>
+        <p class="page-subtitle">Post department-wide announcements to staff and/or students</p>
+      </section>
+
+      <!-- Create Notification -->
+      <section class="section-panel">
+        <div class="panel">
+          <h2>Create Notification</h2>
+          <p class="section-note">Compose and send announcements to selected audiences.</p>
+
+          <form class="section-form" id="createNotificationForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="notif-title">Title</label>
+                <input type="text" id="notif-title" placeholder="e.g. Exam Timetable Released" required />
+              </div>
+
+              <div class="form-group">
+                <label for="notif-type">Type</label>
+                <select id="notif-type" required>
+                  <option value="general">General</option>
+                  <option value="exam">Exam</option>
+                  <option value="timetable">Timetable</option>
+                  <option value="result">Result</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="notif-audience">Audience</label>
+                <select id="notif-audience" required>
+                  <option value="all">All (Staff & Students)</option>
+                  <option value="students">Students Only</option>
+                  <option value="staff">Staff Only</option>
+                  <option value="level">Specific Level</option>
+                </select>
+              </div>
+
+              <div class="form-group" id="levelGroup" style="display:none;">
+                <label for="notif-level">Level</label>
+                <select id="notif-level">
+                  <option value="100">100</option>
+                  <option value="200">200</option>
+                  <option value="300">300</option>
+                  <option value="400">400</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full-width">
+                <label for="notif-message">Message</label>
+                <textarea id="notif-message" rows="4" placeholder="Write your announcement here..." required></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Post Notification</button>
+            </div>
+          </form>
+
+          <!-- TODO: Connect to backend to save and broadcast notification -->
+        </div>
+      </section>
+
+      <!-- Notifications List -->
+      <section class="section-panel">
+        <div class="panel">
+          <h2>Posted Notifications</h2>
+          <p class="section-note">View and manage past announcements.</p>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Audience</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="notificationsBody">
+                <tr>
+                  <td>22 Sep 2026</td>
+                  <td>Exam Timetable Released – 2025/2026 First Semester</td>
+                  <td>Exam</td>
+                  <td>All</td>
+                  <td><span class="status-badge status-sent">Sent</span></td>
+                </tr>
+                <tr>
+                  <td>20 Sep 2026</td>
+                  <td>Result Upload Schedule</td>
+                  <td>Result</td>
+                  <td>Staff</td>
+                  <td><span class="status-badge status-sent">Sent</span></td>
+                </tr>
+                <tr>
+                  <td>18 Sep 2026</td>
+                  <td>Departmental Meeting – All Staff</td>
+                  <td>General</td>
+                  <td>Staff</td>
+                  <td><span class="status-badge status-sent">Sent</span></td>
+                </tr>
+                <tr>
+                  <td>15 Sep 2026</td>
+                  <td>Make-up Classes for 300 Level</td>
+                  <td>Timetable</td>
+                  <td>Level 300</td>
+                  <td><span class="status-badge status-sent">Sent</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- TODO: Add pagination, filters, and delete/edit actions via backend -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Sidebar toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('sidebar-open');
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      root.classList.add('dark-mode');
+      themeToggle.textContent = '☀️';
+    } else {
+      root.classList.remove('dark-mode');
+      themeToggle.textContent = '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.toggle('dark-mode');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Audience level toggle
+    const audienceSelect = document.getElementById('notif-audience');
+    const levelGroup = document.getElementById('levelGroup');
+
+    audienceSelect.addEventListener('change', () => {
+      if (audienceSelect.value === 'level') {
+        levelGroup.style.display = 'flex';
+      } else {
+        levelGroup.style.display = 'none';
+      }
+    });
+
+    // Create notification form (demo only)
+    const createNotificationForm = document.getElementById('createNotificationForm');
+    const notificationsBody = document.getElementById('notificationsBody');
+
+    createNotificationForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById('notif-title').value.trim();
+      const type = document.getElementById('notif-type').value;
+      const audienceVal = document.getElementById('notif-audience').value;
+      const message = document.getElementById('notif-message').value.trim();
+
+      if (!title || !message) {
+        alert('Title and message are required.');
+        return;
+      }
+
+      let audienceLabel = audienceVal;
+      if (audienceVal === 'all') audienceLabel = 'All';
+      else if (audienceVal === 'students') audienceLabel = 'Students';
+      else if (audienceVal === 'staff') audienceLabel = 'Staff';
+      else if (audienceVal === 'level') {
+        const level = document.getElementById('notif-level').value;
+        audienceLabel = 'Level ' + level;
+      }
+
+      // Add row to table (demo)
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${dateStr}</td>
+        <td>${title}</td>
+        <td>${type}</td>
+        <td>${audienceLabel}</td>
+        <td><span class="status-badge status-sent">Sent</span></td>
+      `;
+      notificationsBody.prepend(row);
+
+      // Reset form
+      createNotificationForm.reset();
+      levelGroup.style.display = 'none';
+
+      // TODO: Send notification to backend for storage and broadcast
+      alert('Notification posted (demo). Backend integration required.');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Applicant Details – Admin – Threshing Floor International</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="admin-applicant-detail.css" />
+</head>
+<body class="detail-body light-mode">
+  <div class="detail-background">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <div class="detail-wrapper">
+    <button class="theme-toggle-absolute" id="themeToggle" aria-label="Toggle theme">🌙</button>
+
+    <div class="marquee-banner">
+      <div class="marquee-content">
+        <span>Admin – Applicant Details</span>
+        <span aria-hidden="true"> • </span>
+        <span>Threshing Floor International School of Ministry and Biblical Studies</span>
+        <span aria-hidden="true"> • </span>
+      </div>
+    </div>
+
+    <div class="detail-card">
+      <div class="detail-header">
+        <div class="detail-logo">⚙️ Admin Portal</div>
+        <h1>Applicant Details</h1>
+        <p class="detail-subtitle">Review application and make a decision</p>
+      </div>
+
+      <div id="loadingState" class="detail-loading">
+        <div class="spinner"></div>
+        <div>Loading applicant details…</div>
+      </div>
+
+      <div id="errorState" class="detail-error" style="display:none;">
+        <div class="error-icon">⚠️</div>
+        <h2>Unable to load applicant</h2>
+        <p id="errorMessage">An unexpected error occurred.</p>
+        <div class="error-actions">
+          <button class="btn-secondary" id="retryButton">Retry</button>
+          <a href="admin-applicants.html" class="btn-link">Back to List</a>
+        </div>
+      </div>
+
+      <div id="unauthorizedState" class="detail-error" style="display:none;">
+        <div class="error-icon">🚫</div>
+        <h2>Access Denied</h2>
+        <p>You must be logged in as an admin to view this page.</p>
+        <div class="error-actions">
+          <a href="login.html" class="btn-primary">Login</a>
+        </div>
+      </div>
+
+      <div id="detailContent" class="detail-content" style="display:none;">
+        <!-- Header summary -->
+        <div class="summary-header">
+          <div class="summary-block">
+            <div class="summary-label">Name</div>
+            <div class="summary-value" id="applicantName">–</div>
+          </div>
+          <div class="summary-block">
+            <div class="summary-label">Email</div>
+            <div class="summary-value" id="applicantEmail">–</div>
+          </div>
+          <div class="summary-block">
+            <div class="summary-label">Application ID</div>
+            <div class="summary-value" id="applicationId">–</div>
+          </div>
+          <div class="summary-block">
+            <div class="summary-label">Program</div>
+            <div class="summary-value" id="applicantProgram">–</div>
+          </div>
+          <div class="summary-block">
+            <div class="summary-label">Status</div>
+            <div class="summary-value">
+              <span class="status-badge" id="applicantStatus">–</span>
+            </div>
+          </div>
+          <div class="summary-block">
+            <div class="summary-label">Payment</div>
+            <div class="summary-value">
+              <span class="payment-badge" id="applicantPayment">–</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sections -->
+        <div class="sections-grid">
+          <!-- Biodata -->
+          <div class="detail-section">
+            <h2 class="section-title">📋 Biodata</h2>
+            <div class="section-grid">
+              <div class="field">
+                <div class="field-label">Full Name</div>
+                <div class="field-value" id="bioFullName">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Email</div>
+                <div class="field-value" id="bioEmail">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Sex</div>
+                <div class="field-value" id="bioSex">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Date of Birth</div>
+                <div class="field-value" id="bioDob">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Country</div>
+                <div class="field-value" id="bioCountry">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">State</div>
+                <div class="field-value" id="bioState">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Phone</div>
+                <div class="field-value" id="bioPhone">–</div>
+              </div>
+              <div class="field full">
+                <div class="field-label">Address</div>
+                <div class="field-value" id="bioAddress">–</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Next of Kin -->
+          <div class="detail-section">
+            <h2 class="section-title">👥 Next of Kin</h2>
+            <div class="section-grid">
+              <div class="field">
+                <div class="field-label">Full Name</div>
+                <div class="field-value" id="nokFullName">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">State of Origin</div>
+                <div class="field-value" id="nokState">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Country</div>
+                <div class="field-value" id="nokCountry">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Phone</div>
+                <div class="field-value" id="nokPhone">–</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Academic -->
+          <div class="detail-section">
+            <h2 class="section-title">🎓 Academic</h2>
+            <div class="section-grid">
+              <div class="field">
+                <div class="field-label">Program</div>
+                <div class="field-value" id="acadProgram">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Entry Level</div>
+                <div class="field-value" id="acadEntryLevel">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Study Mode</div>
+                <div class="field-value" id="acadStudyMode">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Preferred Session</div>
+                <div class="field-value" id="acadSession">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Preferred Semester</div>
+                <div class="field-value" id="acadSemester">–</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Documents -->
+          <div class="detail-section">
+            <h2 class="section-title">📁 Documents</h2>
+            <div class="section-grid">
+              <div class="field">
+                <div class="field-label">WAEC/SSCE</div>
+                <div class="field-value" id="docWaec">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">NECO</div>
+                <div class="field-value" id="docNeco">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Birth Certificate</div>
+                <div class="field-value" id="docBirth">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Passport Photo</div>
+                <div class="field-value" id="docPassport">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Transcript</div>
+                <div class="field-value" id="docTranscript">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Other Documents</div>
+                <div class="field-value" id="docOther">–</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment -->
+          <div class="detail-section">
+            <h2 class="section-title">💳 Payment</h2>
+            <div class="section-grid">
+              <div class="field">
+                <div class="field-label">Payment Status</div>
+                <div class="field-value" id="payStatus">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Amount</div>
+                <div class="field-value" id="payAmount">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Currency</div>
+                <div class="field-value" id="payCurrency">–</div>
+              </div>
+              <div class="field">
+                <div class="field-label">Paid On</div>
+                <div class="field-value" id="payPaidAt">–</div>
+              </div>
+              <div class="field full">
+                <div class="field-label">Reference</div>
+                <div class="field-value" id="payReference">–</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decision -->
+        <div id="decisionCard" class="decision-card">
+          <h2 class="decision-title">Make Decision</h2>
+          <p class="decision-note">
+            Once approved or rejected, this application cannot be changed through this interface.
+          </p>
+
+          <div id="alreadyDecided" style="display:none;">
+            <div class="info-row">
+              <span class="info-label">Current Status:</span>
+              <span class="info-value" id="currentStatusText">–</span>
+            </div>
+          </div>
+
+          <div id="decisionForm" style="display:none;">
+            <div class="decision-actions">
+              <button class="btn-primary" id="approveBtn">Approve</button>
+              <button class="btn-secondary" id="rejectBtn">Reject</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-footer">
+          <a href="admin-applicants.html" class="btn-secondary">Back to List</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin-applicant-detail.js"></script>
+</body>
+</html>

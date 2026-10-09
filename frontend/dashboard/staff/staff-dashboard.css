@@ -1,0 +1,43 @@
+/* Staff-specific tweaks (optional) */
+
+.staff-info {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Notification type badges for staff */
+.notif-type.hod {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.notif-type.system {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.notif-type.live {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+/* Responsive sidebar (same pattern as student pages) */
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 56px;
+    height: calc(100vh - 56px);
+    transition: left 0.2s ease;
+    z-index: 90;
+  }
+
+  .sidebar.sidebar-open {
+    left: 0;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+}

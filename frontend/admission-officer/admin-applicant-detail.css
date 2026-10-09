@@ -1,0 +1,64 @@
+/* ========== Theme Variables ========== */
+
+.detail-body.light-mode {
+  --detail-bg-start: #eef2ff;
+  --detail-bg-mid: #e0e7ff;
+  --detail-bg-end: #eef2ff;
+
+  --detail-text-primary: #111827;
+  --detail-text-secondary: #4b5563;
+
+  --detail-card-bg: rgba(255, 255, 255, 0.75);
+  --detail-card-border: rgba(255, 255, 255, 0.6);
+  --detail-card-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+
+  --detail-logo-color: #2563eb;
+  --detail-logo-glow: rgba(37, 99, 235, 0.35);
+
+  --detail-marquee-bg: rgba(255, 255, 255, 0.55);
+  --detail-marquee-border: rgba(0, 0, 0, 0.08);
+  --detail-marquee-text: #1f2937;
+
+  --detail-orb-1: rgba(37, 99, 235, 0.35);
+  --detail-orb-2: rgba(124, 58, 237, 0.25);
+  --detail-orb-3: rgba(6, 182, 212, 0.25);
+
+  --detail-section-bg: rgba(255, 255, 255, 0.06);
+  --detail-section-border: rgba(255, 255, 255, 0.12);
+
+  --detail-status-draft-bg: #fef3c7;
+  --detail-status-draft-border: #fcd34d;
+  --detail-status-draft-text: #92400e;
+
+  --detail-status-submitted-bg: #dbeafe;
+  --detail-status-submitted-border: #60a5fa;
+  --detail-status-submitted-text: #1e3a8a;
+
+  --detail-status-under_review-bg: #e0e7ff;
+  --detail-status-under_review-border: #818cf8;
+  --detail-status-under_review-text: #312e81;
+
+  --detail-status-approved-bg: #d1fae5;
+  --detail-status-approved-border: #34d399;
+  --detail-status-approved-text: #065f46;
+
+  --detail-status-rejected-bg: #fee2e2;
+  --detail-status-rejected-border: #f87171;
+  --detail-status-rejected-text: #991b1b;
+
+  --detail-payment-unpaid-bg: #fee2e2;
+  --detail-payment-unpaid-border: #f87171;
+  --detail-payment-unpaid-text: #991b1b;
+
+  --detail-payment-paid-bg: #d1fae5;
+  --detail-payment-paid-border: #34d399;
+  --detail-payment-paid-text: #065f46;
+
+  --detail-error-bg: rgba(239, 68, 68, 0.12);
+  --detail-error-border: rgba(239, 68, 68, 0.35);
+  --detail-error-text: #dc2626;
+}
+
+.detail-body.dark-mode {
+  --detail-bg-start: #0b0f19;
+  --detail-bg-mid:

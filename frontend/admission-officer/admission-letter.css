@@ -1,0 +1,494 @@
+/* ========== Base Styles ========== */
+
+.letter-body {
+  margin: 0;
+  padding: 0;
+  background: #f3f4f6;
+  font-family: 'Times New Roman', Times, serif;
+  min-height: 100vh;
+}
+
+.letter-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Control Panel */
+.control-panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.control-panel h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #1f2937;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.control-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-download,
+.btn-print,
+.btn-back {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: system-ui, -apple-system, sans-serif;
+  border: none;
+}
+
+.btn-download {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.btn-print {
+  background: #10b981;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-print:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+.btn-back {
+  background: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+}
+
+.btn-back:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+/* Letter Container */
+.letter-container {
+  background: #fff;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  position: relative;
+  line-height: 1.6;
+  color: #1f2937;
+}
+
+/* Letter Header */
+.letter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 3px solid #2563eb;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.institution-logo {
+  text-align: center;
+}
+
+.logo-placeholder {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.institution-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2563eb;
+  letter-spacing: 1px;
+  margin-bottom: 0.25rem;
+}
+
+.institution-tagline {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.letter-meta {
+  text-align: right;
+}
+
+.meta-item {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.meta-label {
+  font-weight: 700;
+  color: #4b5563;
+  margin-right: 0.5rem;
+}
+
+.meta-value {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+/* Letter Title */
+.letter-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.letter-title h1 {
+  font-size: 1.8rem;
+  color: #1f2937;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.75rem;
+  display: inline-block;
+}
+
+/* Recipient Address */
+.recipient-address {
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+}
+
+.recipient-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+}
+
+.recipient-email,
+.recipient-phone,
+.recipient-state {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 0.15rem;
+}
+
+/* Salutation */
+.letter-salutation {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+}
+
+/* Letter Content */
+.letter-content {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #1f2937;
+}
+
+.letter-content p {
+  margin-bottom: 1.25rem;
+  text-align: justify;
+}
+
+.opening-paragraph {
+  text-align: center !important;
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Admission Details Box */
+.admission-details-box {
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 700;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.detail-value {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.95rem;
+  text-align: right;
+}
+
+/* Conditions List */
+.conditions-list {
+  background: #fef3c7;
+  border: 2px solid #fbbf24;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.conditions-list h3 {
+  margin: 0 0 1rem 0;
+  color: #92400e;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.conditions-list ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.conditions-list li {
+  margin-bottom: 0.75rem;
+  color: #78350f;
+  line-height: 1.6;
+}
+
+/* Letter Closing */
+.letter-closing {
+  margin-top: 3rem;
+}
+
+.letter-closing p {
+  margin-bottom: 2rem;
+}
+
+.signature-section {
+  margin-top: 3rem;
+}
+
+.signature-line {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.signature-placeholder {
+  width: 200px;
+  height: 80px;
+}
+
+.signature-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.signatory-details {
+  flex: 1;
+}
+
+.signatory-name {
+  font-size: 1.1rem;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+}
+
+.signatory-title {
+  font-size: 0.95rem;
+  color: #4b5563;
+}
+
+/* Letter Footer */
+.letter-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #e5e7eb;
+}
+
+.footer-note {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 0.85rem;
+  color: #991b1b;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.footer-contact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* QR Section */
+.qr-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed #e5e7eb;
+}
+
+.qr-code {
+  text-align: center;
+}
+
+.qr-placeholder {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background: #fff;
+}
+
+.qr-placeholder svg {
+  width: 100%;
+  height: 100%;
+}
+
+.qr-caption {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.admission-id-display {
+  text-align: center;
+}
+
+.qr-label {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.qr-id {
+  font-size: 1.1rem;
+  color: #2563eb;
+  font-weight: 800;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+}
+
+/* Print Styles */
+@media print {
+  .letter-body {
+    background: #fff;
+  }
+
+  .letter-wrapper {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .control-panel {
+    display: none !important;
+  }
+
+  .letter-container {
+    box-shadow: none;
+    padding: 2rem;
+    border-radius: 0;
+  }
+
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .letter-wrapper {
+    padding: 1rem;
+  }
+
+  .letter-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .letter-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .letter-meta {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .letter-title h1 {
+    font-size: 1.4rem;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .detail-value {
+    text-align: left;
+  }
+
+  .qr-section {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .control-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .control-actions {
+    flex-direction: column;
+  }
+
+  .btn-download,
+  .btn-print,
+  .btn-back {
+    width: 100%;
+  }
+}

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applicant Portal – Threshing Floor International</title>
+<meta name="description" content="Threshing Floor International applicant profile, application and admission portal.">
+<!-- Optional: set this to your API origin only when it is hosted separately. -->
+<meta name="api-base" content="">
+<style>
+:root{--bg:#f8fafc;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--primary:#2563eb;--side:#1e293b}
+body.dark-mode{--bg:#0f172a;--card:#1e293b;--text:#f8fafc;--muted:#94a3b8;--border:#334155;--side:#0b1120}
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,sans-serif}
+body{background:var(--bg);color:var(--text);min-height:100vh}
+.app-layout{display:flex;min-height:100vh}
+.sidebar{width:250px;background:var(--side);color:#f8fafc;padding:1.5rem;flex-shrink:0}
+.brand h2{font-size:1.25rem;margin-bottom:2rem;color:#38bdf8}
+.nav-section{display:flex;flex-direction:column;gap:.4rem}
+.nav-item{display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;border:none;background:transparent;color:#cbd5e1;border-radius:8px;cursor:pointer;text-align:left;font-size:.95rem;width:100%}
+.nav-item:hover,.nav-item.active{background:rgba(255,255,255,.12);color:#fff}
+.main-content{flex:1;padding:2rem;max-width:1100px}
+.top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.page-title{font-size:1.6rem}
+.theme-toggle{background:var(--card);border:1px solid var(--border);padding:.4rem .7rem;border-radius:8px;cursor:pointer;font-size:1.1rem}
+.card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.5rem;margin-bottom:1.5rem}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.card-title{font-size:1.2rem}
+.status-badge{padding:.25rem .75rem;border-radius:999px;font-size:.8rem;font-weight:600;background:#e0f2fe;color:#0369a1}
+.profile-header{display:flex;align-items:center;gap:1.25rem;margin:1.25rem 0}
+.avatar-wrapper{position:relative}
+.avatar{width:90px;height:90px;border-radius:50%;object-fit:cover;background:#cbd5e1;border:3px solid var(--border)}
+.avatar-edit-btn{position:absolute;bottom:0;right:0;border:none;border-radius:50%;padding:.3rem;cursor:pointer}
+.profile-name{font-size:1.2rem;font-weight:600}.profile-id{color:var(--muted);font-size:.9rem}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.form-group label{display:block;font-size:.75rem;color:var(--muted);text-transform:uppercase;margin-bottom:.3rem;font-weight:600}
+.display-value{font-weight:500}
+.form-actions{margin-top:1.25rem;display:flex;gap:.75rem}
+.section{display:none}.section.active{display:block}
+.btn{padding:.65rem 1.25rem;border-radius:8px;font-weight:600;cursor:pointer;border:none;text-decoration:none;display:inline-block}
+.btn-primary{background:var(--primary);color:#fff}.btn-secondary{background:var(--border);color:var(--text)}
+.error-card{background:#fef2f2;color:#991b1b;border-color:#fecaca}
+input,select,textarea{width:100%;padding:.6rem;border:1px solid var(--border);border-radius:6px;background:var(--card);color:var(--text)}
+.apply-note{color:var(--muted);font-size:.9rem;margin-top:.5rem}.apply-error{color:#dc2626}
+@media(max-width:800px){.app-layout{flex-direction:column}.sidebar{width:100%}}
+
+.brand{display:flex;align-items:center;gap:.75rem;margin-bottom:2rem}.brand-logo{background:var(--primary);color:var(--card);padding:.6rem;border-radius:6px;font-weight:700}.brand-name{font-weight:600;line-height:1.4}
+.main-content{width:100%;min-width:0}.card-header{gap:1rem;flex-wrap:wrap}.profile-info{min-width:0}.display-value,.profile-name,.profile-id{overflow-wrap:anywhere}.btn:disabled{opacity:.55;cursor:not-allowed}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--primary);outline-offset:3px}.avatar-wrapper{flex-shrink:0;width:90px;height:90px}.avatar-edit-btn{background:var(--card);border:1px solid var(--border)}.portal-notice{margin-bottom:1rem;padding:.75rem;border:1px solid var(--border);border-radius:6px}.form-actions{flex-wrap:wrap}.retry-button{margin-top:.75rem}.letter-area{margin-top:1rem}
+@media(max-width:800px){.sidebar{padding:1rem}.brand{margin-bottom:1rem}.nav-section{flex-direction:row;flex-wrap:wrap}.nav-item{width:auto;flex:1 1 130px}.main-content{padding:1rem}.form-grid{grid-template-columns:minmax(0,1fr)}.page-title{font-size:1.35rem}.profile-header{gap:.75rem}.profile-name{font-size:1rem}}
+</style>
+</head>
+<body class="light-mode">
+<div class="app-layout">
+<aside class="sidebar">
+<div class="brand">
+<div class="brand-logo">TF</div>
+<div class="brand-name">
+Threshing Floor<br>
+International
+</div>
+</div>
+
+<nav class="nav-section">
+<button class="nav-item active" data-section="overview">
+<span class="nav-icon">🏠</span>
+Overview
+</button>
+
+<button class="nav-item" data-section="profile">
+<span class="nav-icon">👤</span>
+Profile & Biodata
+</button>
+
+<button class="nav-item" data-section="admission">
+<span class="nav-icon">🎓</span>
+Admission
+</button>
+
+<button class="nav-item" data-section="security">
+<span class="nav-icon">🔒</span>
+Security
+</button>
+
+<button class="nav-item" id="logoutNav">
+<span class="nav-icon">🚪</span>
+Logout
+</button>
+</nav>
+</aside>
+
+<main class="main-content">
+<div class="top-bar">
+<h1 class="page-title">Applicant Portal</h1>
+
+<button
+class="theme-toggle"
+id="themeToggle"
+type="button"
+aria-label="Toggle theme"
+>
+🌙
+</button>
+</div>
+
+<div role="status"
+id="loadingState" class="card">
+Loading your application…
+</div>
+
+<div
+role="alert"
+id="errorState"
+class="card error-card"
+style="display: none;"
+></div>
+
+<!-- Overview -->
+<section id="overview" class="section active">
+<div class="card">
+<div class="card-header">
+<h2 class="card-title">Application Overview</h2>
+<span id="statusBadge" class="status-badge">
+–
+</span>
+</div>
+
+<div class="profile-header">
+<div class="avatar-wrapper">
+<img
+id="overviewAvatar"
+class="avatar"
+alt="Applicant"
+>
+</div>
+
+<div class="profile-info">
+<div id="overviewName" class="profile-name">–</div>
+<div id="overviewId" class="profile-id">
+Application ID: –
+</div>
+</div>
+</div>
+
+<div class="form-grid overview-grid">
+<div class="form-group">
+<label>Email</label>
+<div id="overviewEmail" class="display-value">–</div>
+</div>
+
+<div class="form-group">
+<label>Program Code</label>
+<div id="overviewProgramCode" class="display-value">–</div>
+</div>
+
+<div class="form-group">
+<label>Program Name</label>
+<div id="overviewProgramName" class="display-value">–</div>
+</div>
+
+<div class="form-group">
+<label>Entry Level</label>
+<div id="overviewEntryLevel" class="display-value">–</div>
+</div>
+
+<div class="form-group">
+<label>Study Mode</label>
+<div id="overviewStudyMode" class="display-value">–</div>
+</div>
+
+<div class="form-group">
+<label>Session</label>
+<div id="overviewSession" class="display-value">–</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Admission -->
+<section id="admission" class="section">
+<div class="card">
+<div class="card-header">
+<h2 class="card-title">Admission Status & Documents</h2>
+</div>
+
+<div id="admissionLoading" class="apply-note">
+Loading admission information…
+</div>
+
+<div
+role="alert"
+id="admissionError"
+class="apply-error"
+style="display: none;"
+></div>
+
+<div id="admissionContent" style="display: none;">
+<div class="form-grid">
+<div class="form-group">
+<label>Application ID</label>
+<div id="admIdentity" class="display-value">–</div>
+</div>
+
+<div class="form-group">
+<label>Admission Status</label>
+<div id="admStatus" class="display-value">–</div>
+</div>
+
+<div class="form-group">
+<label>Program Code</label>
+<div id="admProgramCode" class="display-value">–</div>
+</div>
+
+<div class="form-group">
+<label>Program Name</label>
+<div id="admProgramName" class="display-value">–</div>
+</div>
+
+<div class="form-group">
+<label>Entry Level</label>
+<div id="admEntryLevel" class="display-value">–</div>
+</div>
+
+<div class="form-group">
+<label>Study Mode</label>
+<div id="admStudyMode" class="display-value">–</div>
+</div>
+</div>
+
+<div class="letter-area">
+<div
+id="noLetter"
+class="apply-note"
+style="display: none;"
+>
+Your admission letter is not yet available. The admissions
+team will upload it once your application is reviewed and
+approved.
+</div>
+
+<div
+id="letterAvailable"
+style="display: none;"
+>
+<p class="apply-note">
+Your admission/SLI letter is ready for download.
+</p>
+
+<a
+id="downloadLetterBtn"
+class="btn btn-primary"
+href="#"
+target="_blank"
+rel="noopener"
+download
+>
+📄 Download Admission Letter
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Profile -->
+<section id="profile" class="section">
+<div class="card">
+<div class="card-header">
+<h2 class="card-title">Profile & Biodata</h2>
+</div>
+
+<div class="profile-header">
+<div class="avatar-wrapper">
+<img
+id="profileAvatar"
+class="avatar"
+alt="Applicant"
+>
+
+<label
+class="avatar-edit-btn"
+title="Change photo"
+>
+📷
+
+<input
+type="file"
+id="avatarInput"
+accept="image/jpeg,image/png"
+hidden
+>
+</label>
+</div>
+
+<div class="profile-info">
+<div class="profile-name">
+Profile & Biodata
+</div>
+
+<div class="profile-id">
+JPG or PNG. Maximum 2MB.
+</div>
+</div>
+</div>
+
+<div id="profileNotice" class="portal-notice" role="status" hidden></div>
+<form id="profileForm" class="portal-form">
+<div class="form-grid">
+<div class="form-group">
+<label for="fullName">Full Name</label>
+<input
+type="text"
+id="fullName"
+name="fullName"
+required
+>
+</div>
+
+<div class="form-group">
+<label for="phone">Phone Number</label>
+<input
+type="text"
+id="phone"
+name="phone"
+required
+>
+</div>
+
+<div class="form-group">
+<label for="dob">Date of Birth</label>
+<input
+type="date"
+id="dob"
+name="dob"
+required
+>
+</div>
+
+<div class="form-group">
+<label for="address">Street Address</label>
+<input
+type="text"
+id="address"
+name="address"
+required
+>
+</div>
+</div>
+
+<div class="form-actions">
+<button
+type="submit"
+class="btn btn-primary"
+>
+Save Changes
+</button>
+
+<button
+type="button"
+class="btn btn-secondary"
+id="cancelProfile"
+>
+Cancel
+</button>
+</div>
+</form>
+</div>
+</section>
+
+<!-- Security -->
+<section id="security" class="section">
+<div class="card">
+<div class="card-header">
+<h2 class="card-title">Change Password</h2>
+</div>
+
+<div id="passwordNotice" class="portal-notice" role="status" hidden></div>
+<form id="passwordForm" class="portal-form">
+<div class="form-grid">
+<div class="form-group">
+<label for="currentPassword">
+Current Password
+</label>
+
+<input
+type="password"
+autocomplete="current-password"
+id="currentPassword"
+name="currentPassword"
+required
+>
+</div>
+
+<div class="form-group">
+<label for="newPassword">
+New Password
+</label>
+
+<input
+type="password"
+autocomplete="new-password"
+id="newPassword"
+name="newPassword"
+minlength="8"
+required
+>
+</div>
+
+<div class="form-group">
+<label for="confirmPassword">
+Confirm New Password
+</label>
+
+<input
+type="password"
+autocomplete="new-password"
+id="confirmPassword"
+name="confirmPassword"
+minlength="8"
+required
+>
+</div>
+</div>
+
+<div class="form-actions">
+<button
+type="submit"
+class="btn btn-primary"
+>
+Update Password
+</button>
+
+<button
+type="button"
+class="btn btn-secondary"
+id="cancelPassword"
+>
+Cancel
+</button>
+</div>
+</form>
+</div>
+</section>
+</main>
+</div>
+
+<script>
+/* Matches tfism-fixed/server.js. Serve both files from the server's public folder.
+   Kept external because Helmet's default policy blocks inline JavaScript. */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const configuredBase = document.querySelector('meta[name="api-base"]')?.content.trim();
+  const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
+  const API_BASE = (configuredBase || (isLocal && location.port !== '3001'
+    ? `${location.protocol}//${location.hostname}:3001` : location.origin)).replace(/\/$/, '');
+  const ROUTES = Object.freeze({
+    summary: '/api/applicant/Applicant',
+    profile: '/api/applicants/profile',
+    avatar: '/api/applicants/avatar',
+    password: '/api/applicants/change-password',
+    logout: '/api/logout',
+    letter: '/api/applicant/admission-letter'
+  });
+  const FALLBACK = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#cbd5e1"/><circle cx="50" cy="36" r="18" fill="#64748b"/><path d="M15 95c0-22 16-34 35-34s35 12 35 34" fill="#64748b"/></svg>');
+  let applicantData = null;
+  let loading = false;
+  let downloading = false;
+  let unavailable = false;
+  const url = path => new URL(path, API_BASE + '/').href;
+  const display = (id, value) => { $(id).textContent = value === null || value === undefined || value === '' ? '–' : String(value); };
+  const statusText = value => value ? String(value).replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : 'Pending';
+  function notice(id, message) {
+    const element = $(id);
+    element.textContent = message;
+    element.hidden = !message;
+  }
+  function setBusy(form, busy) {
+    form.querySelectorAll('input,button').forEach(control => { control.disabled = busy; });
+  }
+  function setDataControls(enabled) {
+    $('profileForm').querySelectorAll('input,button').forEach(control => { control.disabled = !enabled; });
+    $('avatarInput').disabled = !enabled;
+  }
+  async function request(path, options = {}, asFile = false) {
+    if (location.protocol === 'file:') throw new Error('Open this portal at http://localhost:3001/applicant-portal after signing in; do not open it as a local file.');
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 20000);
+    try {
+      const response = await fetch(url(path), { ...options, credentials: 'include', cache: 'no-store', signal: controller.signal });
+      const type = response.headers.get('content-type') || '';
+      if (!response.ok) {
+        const data = type.includes('json') ? await response.json().catch(() => ({})) : {};
+        const error = new Error(data.error || data.message || `Request failed (${response.status}).`);
+        error.status = response.status;
+        if (response.status === 401) {
+          unavailable = true;
+          showError('Your session has expired or you are not signed in as an applicant. Please sign in again.', true);
+          setDataControls(false);
+        }
+        throw error;
+      }
+      if (asFile) {
+        if (type.includes('json')) {
+          const data = await response.json();
+          throw new Error(data.error || 'The server returned a message instead of an admission letter.');
+        }
+        return { blob: await response.blob(), disposition: response.headers.get('content-disposition') || '', type };
+      }
+      if (!type.includes('json')) throw new Error(`The server did not return application data. Check that this portal connects to your API at ${API_BASE}.`);
+      const data = await response.json();
+      if (data.success === false || data.error) throw new Error(data.error || data.message || 'The request was unsuccessful.');
+      return data;
+    } catch (error) {
+      if (error.name === 'AbortError') throw new Error('The server took too long to respond. Please try again.');
+      if (error instanceof TypeError) throw new Error(`Cannot reach the applicant server at ${API_BASE}. Ensure it is running and use the same hostname you used to sign in.`);
+      throw error;
+    } finally { clearTimeout(timer); }
+  }
+  function showError(message, signedOut = false) {
+    const box = $('errorState');
+    box.replaceChildren();
+    const text = document.createElement('p');
+    text.textContent = message;
+    box.append(text);
+    if (signedOut) {
+      const link = document.createElement('a');
+      link.className = 'btn btn-primary retry-button';
+      link.href = '/login.html';
+      link.textContent = 'Sign In';
+      box.append(link);
+    } else {
+      const retry = document.createElement('button');
+      retry.className = 'btn btn-secondary retry-button';
+      retry.textContent = 'Retry';
+      retry.type = 'button';
+      retry.addEventListener('click', loadApplicant);
+      box.append(retry);
+    }
+    box.style.display = 'block';
+  }
+  function setAvatar(id, path) {
+    const img = $(id);
+    img.onerror = () => { img.onerror = null; img.removeAttribute('crossorigin'); img.src = FALLBACK; };
+    if (!path) { img.removeAttribute('crossorigin'); img.src = FALLBACK; return; }
+    try {
+      const resolved = new URL(path, API_BASE + '/');
+      if (!['http:', 'https:'].includes(resolved.protocol) || resolved.origin !== new URL(API_BASE).origin) throw new Error('Invalid image origin');
+      img.crossOrigin = 'use-credentials';
+      img.src = resolved.href;
+    } catch { img.src = FALLBACK; }
+  }
+  function fillProfile() {
+    const a = applicantData || {};
+    $('fullName').value = a.fullName || '';
+    // The API stores countryCode separately; never add it to phone on each save.
+    $('phone').value = a.phone || '';
+    $('dob').value = a.dob ? String(a.dob).slice(0, 10) : '';
+    // PATCH maps address to street, not a combined city/state/country address.
+    $('address').value = a.street || '';
+  }
+  function renderApplicant() {
+    const a = applicantData;
+    if (!a) return;
+    display('overviewName', a.fullName);
+    display('overviewId', `Application ID: ${a.identity || a.id || '–'}`);
+    [['overviewEmail','email'],['overviewProgramCode','programCode'],['overviewProgramName','programName'],['overviewEntryLevel','entryLevel'],['overviewStudyMode','studyMode'],['overviewSession','preferredSession']].forEach(([id,key]) => display(id,a[key]));
+    display('statusBadge', statusText(a.applicationStatus || a.status));
+    setAvatar('overviewAvatar', a.passportFilePath);
+    setAvatar('profileAvatar', a.passportFilePath);
+    fillProfile();
+    renderAdmission();
+  }
+  function renderAdmission() {
+    $('admissionLoading').style.display = 'none';
+    $('admissionError').style.display = 'none';
+    if (!applicantData || unavailable) {
+      $('admissionContent').style.display = 'none';
+      $('admissionError').textContent = 'Application data is unavailable. Return to Overview and try again.';
+      $('admissionError').style.display = 'block';
+      return;
+    }
+    const a = applicantData;
+    display('admIdentity', a.identity || a.id);
+    display('admStatus', statusText(a.admissionStatus));
+    [['admProgramCode','programCode'],['admProgramName','programName'],['admEntryLevel','entryLevel'],['admStudyMode','studyMode']].forEach(([id,key]) => display(id,a[key]));
+    // This flag is eligibility only; the download endpoint still checks payment and file existence.
+    const eligible = a.permissions?.canDownloadLetter === true;
+    $('noLetter').style.display = eligible ? 'none' : 'block';
+    $('letterAvailable').style.display = eligible ? 'block' : 'none';
+    $('letterAvailable').querySelector('p').textContent = 'Admission letter access is subject to fee clearance and file availability.';
+    $('admissionContent').style.display = 'block';
+  }
+  async function loadApplicant() {
+    if (loading) return;
+    loading = true;
+    unavailable = false;
+    $('loadingState').style.display = 'block';
+    $('errorState').style.display = 'none';
+    setDataControls(false);
+    try {
+      const data = await request(ROUTES.summary);
+      if (!data.applicant || typeof data.applicant !== 'object' || Array.isArray(data.applicant)) throw new Error('The server response did not include an applicant record.');
+      applicantData = data.applicant;
+      renderApplicant();
+      setDataControls(true);
+    } catch (error) {
+      unavailable = true;
+      showError(error.message, error.status === 401);
+      renderAdmission();
+    } finally {
+      $('loadingState').style.display = 'none';
+      loading = false;
+    }
+  }
+  // Theme storage is optional; blocked storage must not stop application loading.
+  let theme = 'light';
+  try { theme = localStorage.getItem('theme') || theme; } catch {}
+  function applyTheme(value) {
+    theme = value;
+    document.documentElement.classList.toggle('dark-mode', theme === 'dark');
+    document.body.classList.toggle('dark-mode', theme === 'dark');
+    document.body.classList.toggle('light-mode', theme !== 'dark');
+    $('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+    try { localStorage.setItem('theme', theme); } catch {}
+  }
+  applyTheme(theme);
+  $('themeToggle').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+  document.querySelectorAll('.nav-item[data-section]').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.section').forEach(section => section.classList.toggle('active', section.id === button.dataset.section));
+      document.querySelectorAll('.nav-item[data-section]').forEach(item => item.classList.toggle('active', item === button));
+      if (button.dataset.section === 'admission') renderAdmission();
+    });
+  });
+  $('profileForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!applicantData || unavailable) return;
+    const form = event.currentTarget;
+    const payload = { fullName: $('fullName').value.trim(), phone: $('phone').value.trim(), dob: $('dob').value, address: $('address').value.trim() };
+    setBusy(form, true);
+    notice('profileNotice', 'Saving…');
+    try {
+      const data = await request(ROUTES.profile, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      if (!data.applicant) throw new Error('The server did not return the saved profile.');
+      // Mutation endpoints return partial records; preserve identity and permission flags.
+      applicantData = { ...applicantData, ...data.applicant };
+      renderApplicant();
+      notice('profileNotice', 'Profile updated successfully.');
+    } catch (error) { notice('profileNotice', error.message); }
+    finally { setBusy(form, unavailable); }
+  });
+  $('cancelProfile').addEventListener('click', () => { fillProfile(); notice('profileNotice', ''); });
+  $('avatarInput').addEventListener('change', async event => {
+    const input = event.currentTarget;
+    const file = input.files?.[0];
+    if (!file || !applicantData || unavailable) return;
+    if (file.size > 2 * 1024 * 1024 || !['image/jpeg','image/png'].includes(file.type)) {
+      notice('profileNotice', 'Choose a JPG or PNG no larger than 2MB.'); input.value = ''; return;
+    }
+    input.disabled = true;
+    const form = new FormData();
+    form.append('passportFile', file);
+    notice('profileNotice', 'Uploading photo…');
+    try {
+      const data = await request(ROUTES.avatar, { method: 'POST', body: form });
+      if (!data.applicant?.passportFilePath) throw new Error('The server did not return the uploaded photo.');
+      applicantData = { ...applicantData, ...data.applicant };
+      setAvatar('overviewAvatar', applicantData.passportFilePath);
+      setAvatar('profileAvatar', applicantData.passportFilePath);
+      notice('profileNotice', 'Profile picture updated successfully.');
+    } catch (error) { notice('profileNotice', error.message); }
+    finally { input.value = ''; input.disabled = unavailable; }
+  });
+  $('passwordForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const currentPassword = $('currentPassword').value;
+    const newPassword = $('newPassword').value;
+    if (newPassword !== $('confirmPassword').value) { notice('passwordNotice', 'New passwords do not match.'); return; }
+    if (newPassword.length < 8) { notice('passwordNotice', 'New password must be at least 8 characters.'); return; }
+    setBusy(form, true);
+    notice('passwordNotice', 'Updating password…');
+    try {
+      const data = await request(ROUTES.password, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ currentPassword, newPassword }) });
+      form.reset(); notice('passwordNotice', data.message || 'Password changed successfully.');
+    } catch (error) { notice('passwordNotice', error.message); }
+    finally { setBusy(form, false); }
+  });
+  $('cancelPassword').addEventListener('click', () => { $('passwordForm').reset(); notice('passwordNotice', ''); });
+  $('downloadLetterBtn').href = url(ROUTES.letter);
+  $('downloadLetterBtn').removeAttribute('target');
+  $('downloadLetterBtn').addEventListener('click', async event => {
+    event.preventDefault();
+    if (downloading || unavailable) return;
+    downloading = true;
+    const button = event.currentTarget;
+    const label = button.textContent;
+    button.textContent = 'Downloading…';
+    button.setAttribute('aria-disabled', 'true');
+    $('admissionError').style.display = 'none';
+    try {
+      // The singular endpoint streams a file, not {applicant, admissionLetter} JSON.
+      const result = await request(ROUTES.letter, {}, true);
+      const extension = result.type.includes('pdf') ? 'pdf' : result.type.includes('html') ? 'html' : 'bin';
+      const filenameMatch = result.disposition.match(/filename="?([^";]+)"?/i);
+      const filename = filenameMatch?.[1] || `Admission-Letter-${String(applicantData?.identity || 'applicant').replace(/[^a-zA-Z0-9_-]/g,'_')}.${extension}`;
+      const objectUrl = URL.createObjectURL(result.blob);
+      const link = document.createElement('a');
+      link.href = objectUrl; link.download = filename; document.body.append(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 60000);
+    } catch (error) {
+      $('admissionError').textContent = error.message;
+      $('admissionError').style.display = 'block';
+    } finally { downloading = false; button.textContent = label; button.removeAttribute('aria-disabled'); }
+  });
+  $('logoutNav').addEventListener('click', async event => {
+    const button = event.currentTarget;
+    button.disabled = true;
+    try { await request(ROUTES.logout, { method: 'POST' }); location.assign('/login.html'); }
+    catch (error) { showError(`Sign out failed: ${error.message}`); button.disabled = false; }
+  });
+  setAvatar('overviewAvatar', null);
+  setAvatar('profileAvatar', null);
+  loadApplicant();
+})();
+
+</script>
+</body>
+</html>

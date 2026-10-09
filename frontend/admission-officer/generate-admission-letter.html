@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admission Letter – E‑Learning Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="admission-letter.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/10.0.0/html2pdf.bundle.min.js"></script>
+</head>
+<body class="letter-body">
+  <div class="letter-wrapper">
+    <!-- Control Panel -->
+    <div class="control-panel">
+      <h2>Admission Letter Generator</h2>
+      <div class="control-actions">
+        <button class="btn-download" id="downloadPdf">📥 Download PDF</button>
+        <button class="btn-print" id="printLetter">🖨️ Print</button>
+        <button class="btn-back" onclick="window.location.href='admin-dashboard.html'">← Back to Dashboard</button>
+      </div>
+    </div>
+
+    <!-- Admission Letter -->
+    <div class="letter-container" id="admissionLetter">
+      <!-- Letter Header -->
+      <div class="letter-header">
+        <div class="institution-logo">
+          <div class="logo-placeholder">🎓</div>
+          <div class="institution-name">E-LEARNING PORTAL UNIVERSITY</div>
+          <div class="institution-tagline">Excellence in Digital Education</div>
+        </div>
+        <div class="letter-meta">
+          <div class="meta-item">
+            <span class="meta-label">Ref No:</span>
+            <span class="meta-value" id="letterRefNo">EPU/ADM/2026/001</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Date:</span>
+            <span class="meta-value" id="letterDate">September 24, 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Letter Title -->
+      <div class="letter-title">
+        <h1>OFFER OF ADMISSION</h1>
+      </div>
+
+      <!-- Recipient Address -->
+      <div class="recipient-address">
+        <div class="recipient-name" id="recipientName">Mr./Ms. John Doe</div>
+        <div class="recipient-email" id="recipientEmail">john.doe@example.com</div>
+        <div class="recipient-phone" id="recipientPhone">+234 8012345678</div>
+        <div class="recipient-state" id="recipientState">Lagos State, Nigeria</div>
+      </div>
+
+      <!-- Salutation -->
+      <div class="letter-salutation">
+        Dear <span id="salutationName">Mr./Ms. Doe</span>,
+      </div>
+
+      <!-- Letter Body -->
+      <div class="letter-content">
+        <p class="opening-paragraph">
+          <strong>OFFER OF PROVISIONAL ADMISSION INTO THE <span id="programSession">2025/2026</span> ACADEMIC SESSION</strong>
+        </p>
+
+        <p>
+          Following your application for admission into E-Learning Portal University and after careful consideration of your academic qualifications, I am directed to offer you <strong>PROVISIONAL ADMISSION</strong> into the University to pursue the programme stated below:
+        </p>
+
+        <!-- Admission Details Box -->
+        <div class="admission-details-box">
+          <div class="detail-row">
+            <span class="detail-label">PROGRAMME:</span>
+            <span class="detail-value" id="admissionProgram">B.Sc. Computer Science</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">FACULTY:</span>
+            <span class="detail-value" id="admissionFaculty">Faculty of Science</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">ENTRY LEVEL:</span>
+            <span class="detail-value" id="admissionLevel">100 Level</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">STUDY MODE:</span>
+            <span class="detail-value" id="admissionMode">Full-Time</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">SESSION:</span>
+            <span class="detail-value" id="admissionSession">2025/2026 Academic Session</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">ADMISSION ID:</span>
+            <span class="detail-value" id="admissionId">EPU/2026/CS/001</span>
+          </div>
+        </div>
+
+        <p>
+          This offer of admission is provisional and is subject to the approval of the University Senate. You are therefore advised to comply with the following requirements:
+        </p>
+
+        <!-- Conditions List -->
+        <div class="conditions-list">
+          <h3>CONDITIONS OF ADMISSION:</h3>
+          <ol>
+            <li>Payment of the prescribed acceptance fee of <strong>₦50,000</strong> (Fifty Thousand Naira) only.</li>
+            <li>Submission of original copies of all academic certificates and testimonials for verification.</li>
+            <li>Completion of the online registration process on the student portal within <strong>14 days</strong> from the date of this letter.</li>
+            <li>Provision of a valid means of identification (National ID, International Passport, or Driver's License).</li>
+            <li>Submission of <strong>four (4)</strong> recent passport-sized photographs with white background.</li>
+            <li>Undergoing and passing the mandatory medical fitness examination at the University Health Centre.</li>
+            <li>Provision of two (2) credible guarantors who are not members of your family.</li>
+          </ol>
+        </div>
+
+        <p>
+          Please note that failure to meet these requirements within the stipulated timeframe may result in the withdrawal of this offer of admission.
+        </p>
+
+        <p>
+          We congratulate you on this achievement and look forward to welcoming you to our academic community. We wish you a successful and rewarding academic journey with us.
+        </p>
+      </div>
+
+      <!-- Closing -->
+      <div class="letter-closing">
+        <p>
+          Yours faithfully,<br>
+          <strong>For: E-Learning Portal University</strong>
+        </p>
+
+        <div class="signature-section">
+          <div class="signature-line">
+            <div class="signature-placeholder">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 80'%3E%3Cpath d='M20,50 Q40,30 60,50 T100,50 T140,50 T180,50' stroke='%232563eb' stroke-width='3' fill='none'/%3E%3C/svg%3E" alt="Signature" class="signature-image" />
+            </div>
+            <div class="signatory-details">
+              <div class="signatory-name"><strong>Dr. Elizabeth Okon</strong></div>
+              <div class="signatory-title">Deputy Registrar (Admissions)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="letter-footer">
+        <div class="footer-note">
+          <strong>IMPORTANT:</strong> This is a computer-generated admission letter. Any alteration or forgery will attract disciplinary action.
+        </div>
+        <div class="footer-contact">
+          <div class="contact-item">📍 University Main Campus, Digital City, Nigeria</div>
+          <div class="contact-item">📞 +234-800-ELEARN-1</div>
+          <div class="contact-item">✉️ admissions@elearningportal.edu.ng</div>
+          <div class="contact-item">🌐 www.elearningportal.edu.ng</div>
+        </div>
+      </div>
+
+      <!-- QR Code Placeholder -->
+      <div class="qr-section">
+        <div class="qr-code">
+          <div class="qr-placeholder">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="100" height="100" fill="#fff" stroke="#000" stroke-width="2"/>
+              <rect x="10" y="10" width="30" height="30" fill="#000"/>
+              <rect x="60" y="10" width="30" height="30" fill="#000"/>
+              <rect x="10" y="60" width="30" height="30" fill="#000"/>
+              <rect x="50" y="50" width="10" height="10" fill="#000"/>
+              <rect x="70" y="70" width="10" height="10" fill="#000"/>
+            </svg>
+          </div>
+          <div class="qr-caption">Scan to Verify Admission</div>
+        </div>
+        <div class="admission-id-display">
+          <div class="qr-label">Admission ID:</div>
+          <div class="qr-id" id="qrAdmissionId">EPU/2026/CS/001</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get application data from URL params or sessionStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    const appId = urlParams.get('appId');
+
+    // Demo data (in real app, fetch from backend using appId)
+    const applicantData = {
+      id: 'APP001',
+      fullName: 'Mr./Ms. John Doe',
+      email: 'john.doe@example.com',
+      phone: '+234 8012345678',
+      state: 'Lagos',
+      program: 'CS',
+      programName: 'B.Sc. Computer Science',
+      faculty: 'Faculty of Science',
+      level: '100',
+      studyMode: 'Full-Time',
+      session: '2025/2026',
+      admissionId: 'EPU/2026/CS/001',
+      refNo: 'EPU/ADM/2026/001'
+    };
+
+    // Populate letter with applicant data
+    function populateLetter() {
+      // Header
+      document.getElementById('letterRefNo').textContent = applicantData.refNo;
+      document.getElementById('letterDate').textContent = new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      // Recipient
+      document.getElementById('recipientName').textContent = applicantData.fullName;
+      document.getElementById('recipientEmail').textContent = applicantData.email;
+      document.getElementById('recipientPhone').textContent = applicantData.phone;
+      document.getElementById('recipientState').textContent = `${applicantData.state} State, Nigeria`;
+
+      // Salutation
+      const lastName = applicantData.fullName.split(' ').pop();
+      document.getElementById('salutationName').textContent = lastName;
+
+      // Program session
+      document.getElementById('programSession').textContent = `${applicantData.session} Academic Session`.toUpperCase();
+
+      // Admission details
+      document.getElementById('admissionProgram').textContent = applicantData.programName;
+      document.getElementById('admissionFaculty').textContent = applicantData.faculty;
+      document.getElementById('admissionLevel').textContent = `${applicantData.level} Level`;
+      document.getElementById('admissionMode').textContent = applicantData.studyMode;
+      document.getElementById('admissionSession').textContent = `${applicantData.session} Academic Session`;
+      document.getElementById('admissionId').textContent = applicantData.admissionId;
+      document.getElementById('qrAdmissionId').textContent = applicantData.admissionId;
+    }
+
+    // Download PDF
+    document.getElementById('downloadPdf').addEventListener('click', () => {
+      const element = document.getElementById('admissionLetter');
+      
+      const opt = {
+        margin: 0,
+        filename: `Admission_Letter_${applicantData.admissionId}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+      };
+
+      // Show loading state
+      const btn = document.getElementById('downloadPdf');
+      const originalText = btn.textContent;
+      btn.textContent = '⏳ Generating PDF...';
+      btn.disabled = true;
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      });
+    });
+
+    // Print letter
+    document.getElementById('printLetter').addEventListener('click', () => {
+      window.print();
+    });
+
+    // Initialize
+    populateLetter();
+  </script>
+</body>
+</html>
